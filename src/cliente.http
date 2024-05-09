@@ -1,0 +1,39 @@
+### obtener todos los characters
+GET http://localhost:4000/api/tiposcliente
+
+### obtener un character
+GET http://localhost:4000/api/tiposcliente/user-minorista-2024-1234-dsw
+
+### crear un nuevo character
+POST http://localhost:4000/api/tiposcliente
+Content-Type: application/json
+
+{
+    "tipoclienteClass": "Mayorista",
+    "desctipo": "Cliente con compra minima de 10 productos",
+    "porcdescuento": 0.2
+}
+
+### modificar un character(PUT(seteo idempotente,para modificaciones completas del objeto,es decir,todos los propiedades del objeto) y PATCH(para modificar un subconjunto de esas propiedades))
+PUT http://localhost:4000/api/tiposcliente/user-minorista-2024-1234-dsw
+Content-Type: application/json
+
+{
+   "tiposclienteClass": "Miorista", 
+    "desctipo": "Cliente con compra minima de 10 productos",
+    "porcdescuento": 0.2
+}
+
+### modificar un character (PATCH- para modificacion parcial del objeto)
+PATCH http://localhost:4000/api/tiposcliente/user-minorista-2024-1234-dsw
+Content-Type: application/json
+
+{
+    "tiposclienteClass": "Miorista", 
+    "desctipo": "Cliente con compra minima de 5 productos"
+    
+}
+
+### eliminar un character
+DELETE http://localhost:4000/api/tiposcliente/user-minorista-2024-1234-dsw
+
