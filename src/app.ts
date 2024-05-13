@@ -7,11 +7,6 @@ export const app = express()
 app.use(express.json())
 
 //user -- request --express -- express.json() -- app.post (req.body) -- response -- user
-//get /api/characters/ -- obtener lalista de characters
-//get /api/characters/:id -- obtener el character con id = :id
-//post /api/characters -- crear un nuevo character
-//delete /api/characters/:id  -- eliminar character con id = :id
-//put & patch /api/characters/:id -- modificar character con id = :id
 
 export const tiposcliente= [
   new TipoCliente(
