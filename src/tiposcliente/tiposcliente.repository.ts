@@ -25,14 +25,14 @@ export class TiposclienteRepository implements Repository<TipoCliente>{
     return item
   } 
 
-  public update(item: TipoCliente): TipoCliente | undefined { 
-   const tipoclienteIdx = tiposcliente.findIndex((tipocliente) => tipocliente.id === item.id);
-  
-  if (tipoclienteIdx !== -1) {
-     Object.assign (tiposcliente[tipoclienteIdx],item)
-  }
-  return tiposcliente[tipoclienteIdx]
-  }
+    public update(item: TipoCliente): TipoCliente | undefined { 
+    const tipoclienteIdx = tiposcliente.findIndex((tipocliente) => tipocliente.id === item.id);
+    
+    if (tipoclienteIdx !== -1) {
+      tiposcliente[tipoclienteIdx] = { ...tiposcliente[tipoclienteIdx],...item}
+    }
+    return tiposcliente[tipoclienteIdx] // Add this line to return the updated item
+    }
 
 
   public delete(item: {id: string}): TipoCliente | undefined {

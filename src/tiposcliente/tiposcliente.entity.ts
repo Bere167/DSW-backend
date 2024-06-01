@@ -1,5 +1,5 @@
 import  crypto from 'node:crypto';
-import {app, tiposcliente} from "../app";
+//import {app, tiposcliente} from "../app";
 
 export class TipoCliente {
     constructor(

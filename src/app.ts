@@ -1,24 +1,16 @@
-import express, { Express, NextFunction, Response,Request } from "express";
+import express, { NextFunction, Response,Request } from "express";
 import { TipoCliente } from "./tiposcliente/tiposcliente.entity.js";
-import {it} from 'node:test'
+//import {it} from 'node:test'
 import { TiposclienteRepository } from "./tiposcliente/tiposcliente.repository.js";
 
 
-export const app = express()
+const app = express()
 app.use(express.json())
 
 //user -- request --express -- express.json() -- app.post (req.body) -- response -- user
-export const repository = new TiposclienteRepository
+const repository = new TiposclienteRepository()
 
 
-export const tiposcliente= [
-  new TipoCliente(
-  'Minorista',
-  'Cliente sin compra minima',
-  0,
-  'user-minorista-2024-1234-dsw',
-),
-]
 
 function sanitizeTipoClienteInput(req: Request, res: Response, next: NextFunction){
   req.body.sanitizedInput = {
@@ -38,12 +30,12 @@ app.get('/api/tiposcliente',(req,res)=>{
 
 //obtener un tipo cliente por id
 app.get('/api/tiposcliente/:id',(req,res)=>{
-  //const tipocliente = tiposcliente.find((tipocliente)=>tipocliente.id === req.params.id)
+  
   const tipocliente = repository.findOne({id:req.params.id})
   if(!tipocliente){
     return res.status(404).send({message:'Cliente no encontrado'})
   }
-  res.json(tiposcliente)
+  res.json({data:tipocliente})
 })
 
 //crear un tipo cliente
@@ -64,15 +56,12 @@ app.post('/api/tiposcliente', sanitizeTipoClienteInput,(req,res)=>{
 app.put('/api/tiposcliente/:id', (req, res) => {
   req.body.id = req.params.id
   const tipocliente = repository.update(req.body)
-
-  const tipoclienteIdx = tiposcliente.findIndex((tipocliente) => tipocliente.id === req.params.id);
   
   if (!tipocliente){
     return res.status(404).send({ message: 'Cliente no encontrado' });
   }
-  
-  //Object.assign (tiposcliente[tipoclienteIdx],req.body)
-  return res.status(200).send({message:'Cliente modificado exitosamente', data: tiposcliente})
+
+  return res.status(200).send({message:'Cliente modificado exitosamente', data: tipocliente})
 })
 
 //modificar un tipo cliente(solo algunas propiedades)
@@ -80,15 +69,12 @@ app.put('/api/tiposcliente/:id', (req, res) => {
 app.patch('/api/tiposcliente/:id',(req, res) => {
   req.body.id = req.params.id
   const tipocliente = repository.update(req.body)
-
-  const tipoclienteIdx = tiposcliente.findIndex((tipocliente) => tipocliente.id === req.params.id)
   
   if (!tipocliente) {
     return res.status(404).send({ message: 'Cliente no encontrado' });
   }
   
-  //Object.assign (tiposcliente[tipoclienteIdx],req.body)
-  return res.status(200).send({message:'Cliente modificado exitosamente', data: tiposcliente})
+  return res.status(200).send({message:'Cliente modificado exitosamente', data: tipocliente})
 })
 
 //borrar un tipo cliente
@@ -96,8 +82,6 @@ app.delete('/api/tiposcliente/:id', (req, res) => {
 const id= req.params.id
 const tipocliente = repository.delete({id:req.params.id})
 
-
- //const tipoclienteIdx = tiposcliente.findIndex((tipocliente) => tipocliente.id === req.params.id)
  if (!tipocliente) {
     return res.status(404).send({ message: 'Cliente no encontrado' });
  } else{
