@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "tipoclienteClass": "Mayorista",
-    "desctipo": "Cliente con compra minima de 10 producto",
+    "desctipo": "Cliente con compra minima de 10 productos",
     "porcdescuento": 0.2
 }
 

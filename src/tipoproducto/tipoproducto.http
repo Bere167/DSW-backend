@@ -1,0 +1,34 @@
+### obtener todos los tipo producto
+GET http://localhost:4000/api/tipoproducto
+
+### obtener un tipo producto
+GET http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+
+### crear un nuevo tipo producto
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+
+{
+  "name": "Gabinete",
+  "descprod": "Contendrá todos los componentes funcionales de la misma"
+}
+
+### modificar un tipo producto (PUT - recurso completo e idempotente)
+PUT http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+Content-Type: application/json
+
+{
+  "name": "Memoria",
+  "descprod": "Las memorias sirven para cargar y almacenar todas las instrucciones que se ejecutan en el procesador"  
+
+}
+### modificar un tipo producto (PATCH - recurso parcial)
+PATCH http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+Content-Type: application/json
+
+{
+  "descprod": "Una unidad central de procesamiento, o CPU, es una pieza de hardware que permite que tu computadora interactúe con todas las aplicaciones y programas instalados." 
+}
+
+### borrar un tipo producto
+DELETE http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
