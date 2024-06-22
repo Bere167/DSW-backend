@@ -1,0 +1,87 @@
+### GET all employees
+GET http://localhost:3000/api/employees
+
+### POST an employee
+# @name createEmployee
+POST http://localhost:3000/api/employees
+Content-Type: application/json
+
+{
+    "dni_empleado": "12345678",
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "tel": "1122334455",
+    "mail": "juan.perez@example.com",
+    "domicilio": "Calle Falsa 123",
+    "cuil": "20-12345678-3",
+    "usuario": "juanp"
+}
+
+### ID
+@id = {{createEmployee.response.body.data.id}}
+
+### GET one employee
+GET http://localhost:3000/api/employees/{{id}}
+
+### PUT an employee
+PUT http://localhost:3000/api/employees/{{id}}
+Content-Type: application/json
+
+{
+    "dni_empleado": "87654321",
+    "nombre": "María",
+    "apellido": "López",
+    "tel": "5544332211",
+    "mail": "maria.lopez@example.com",
+    "domicilio": "Avenida Siempreviva 742",
+    "cuil": "27-87654321-4",
+    "usuario": "marial"
+}
+
+### POST an employee
+POST http://localhost:3000/api/employees
+Content-Type: application/json
+
+{
+    "dni_empleado": "23456789",
+    "nombre": "Carlos",
+    "apellido": "Gomez",
+    "tel": "4455667788",
+    "mail": "carlos.gomez@example.com",
+    "domicilio": "Diagonal 123",
+    "cuil": "23-23456789-5",
+    "usuario": "carlosg"
+}
+
+### POST an employee
+# @name createEmployeeToDelete
+POST http://localhost:3000/api/employees
+Content-Type: application/json
+
+{
+    "dni_empleado": "34567890",
+    "nombre": "Ana",
+    "apellido": "Martinez",
+    "tel": "5566778899",
+    "mail": "ana.martinez@example.com",
+    "domicilio": "Callejón Diagon 456",
+    "cuil": "23-34567890-6",
+    "usuario": "anam"
+}
+
+### DELETE an employee
+@idToDelete = {{createEmployeeToDelete.response.body.data.id}}
+DELETE http://localhost:3000/api/employees/{{idToDelete}}
+
+### PATCH an employee
+PATCH http://localhost:3000/api/employees/{{idToDelete}}
+Content-Type: application/json
+
+{
+    "tel": "6677889900",
+    "domicilio": "Calle Nueva 789",
+    "usuario": "anamod"
+}
+
+### DELETE an employee
+DELETE http://localhost:3000/api/employees/{{idToDelete}}
