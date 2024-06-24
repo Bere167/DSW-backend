@@ -1,92 +1,84 @@
-import { Request, Response, NextFunction } from 'express'
-import { Character } from './character.entity.js'
-import { orm } from '../shared/db/orm.js'
+import { Request, Response, NextFunction } from 'express';
+import { TipoEmpleadoRepository } from './tipoEmpleado.repository';
+import { TipoEmpleado } from './tipoEmpleado.entity';
 
-const em = orm.em
+const repository = new TipoEmpleadoRepository();
 
-function sanitizeCharacterInput(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+function sanitizeTipoEmpleadoInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
-    name: req.body.name,
-    characterClass: req.body.characterClass,
-    level: req.body.level,
-    hp: req.body.hp,
-    mana: req.body.mana,
-    attack: req.body.attack,
-    items: req.body.items,
-  }
-  //more checks here
+    dni_empleado: req.body.dni_empleado,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    tel: req.body.tel,
+    mail: req.body.mail,
+    domicilio: req.body.domicilio,
+    cuil: req.body.cuil,
+    usuario: req.body.usuario,
+  };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
-      delete req.body.sanitizedInput[key]
+      delete req.body.sanitizedInput[key];
     }
-  })
-  next()
+  });
+  next();
 }
 
-async function findAll(req: Request, res: Response) {
-  try {
-    const characters = await em.find(
-      Character,
-      {},
-      { populate: ['characterClass', 'items'] }
-    )
-    res.status(200).json({ message: 'found all characters', data: characters })
-  } catch (error: any) {
-    res.status(500).json({ message: error.message })
+// Obtener una lista de todos los tipos de empleado
+function findAll(req: Request, res: Response) {
+  res.json({ data: repository.findAll() });
+}
+
+// Obtener un tipo de empleado por id
+function findOne(req: Request, res: Response) {
+  const tipoEmpleado = repository.findOne({ id: req.params.id });
+  if (!tipoEmpleado) {
+    return res.status(404).send({ message: 'Empleado no encontrado' });
+  }
+  res.json({ data: tipoEmpleado });
+}
+
+// Crear un tipo de empleado
+function add(req: Request, res: Response) {
+  const input = req.body.sanitizedInput;
+
+  const tipoEmpleadoInput = new TipoEmpleado(
+    input.dni_empleado,
+    input.nombre,
+    input.apellido,
+    input.tel,
+    input.mail,
+    input.domicilio,
+    input.cuil,
+    input.usuario
+  );
+
+  const tipoEmpleado = repository.add(tipoEmpleadoInput);
+  return res.status(201).send({ message: 'Empleado creado exitosamente', data: tipoEmpleado });
+}
+
+// Modificar un tipo de empleado (todas las propiedades)
+function update(req: Request, res: Response) {
+  req.body.id = req.params.id;
+  const tipoEmpleado = repository.update(req.body);
+
+  if (!tipoEmpleado) {
+    return res.status(404).send({ message: 'Empleado no encontrado' });
+  }
+
+  return res.status(200).send({ message: 'Empleado modificado exitosamente', data: tipoEmpleado });
+}
+
+// Borrar un tipo de empleado
+function remove(req: Request, res: Response) {
+  const id = req.params.id;
+  const tipoEmpleado = repository.delete({ id: req.params.id });
+
+  if (!tipoEmpleado) {
+    return res.status(404).send({ message: 'Empleado no encontrado' });
+  } else {
+    return res.status(200).send({ message: 'Empleado borrado exitosamente' });
   }
 }
 
-async function findOne(req: Request, res: Response) {
-  try {
-    const id = req.params.id
-    const character = await em.findOneOrFail(
-      Character,
-      { id },
-      { populate: ['characterClass', 'items'] }
-    )
-    res.status(200).json({ message: 'found character', data: character })
-  } catch (error: any) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-async function add(req: Request, res: Response) {
-  try {
-    const character = em.create(Character, req.body.sanitizedInput)
-    await em.flush()
-    res.status(201).json({ message: 'character created', data: character })
-  } catch (error: any) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-async function update(req: Request, res: Response) {
-  try {
-    const id = req.params.id
-    const characterToUpdate = await em.findOneOrFail(Character, { id })
-    em.assign(characterToUpdate, req.body.sanitizedInput)
-    await em.flush()
-    res
-      .status(200)
-      .json({ message: 'character updated', data: characterToUpdate })
-  } catch (error: any) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-async function remove(req: Request, res: Response) {
-  try {
-    const id = req.params.id
-    const character = em.getReference(Character, id)
-    await em.removeAndFlush(character)
-  } catch (error: any) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-export { sanitizeCharacterInput, findAll, findOne, add, update, remove }
+export { sanitizeTipoEmpleadoInput, findAll, findOne, add, update, remove };

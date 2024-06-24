@@ -1,9 +1,9 @@
 ### GET all employees
-GET http://localhost:3000/api/employees
+GET http://localhost:4000/api/employees
 
 ### POST an employee
 # @name createEmployee
-POST http://localhost:3000/api/employees
+POST http://localhost:4000/api/employees
 Content-Type: application/json
 
 {
@@ -21,10 +21,10 @@ Content-Type: application/json
 @id = {{createEmployee.response.body.data.id}}
 
 ### GET one employee
-GET http://localhost:3000/api/employees/{{id}}
+GET http://localhost:4000/api/employees/{{id}}
 
 ### PUT an employee
-PUT http://localhost:3000/api/employees/{{id}}
+PUT http://localhost:4000/api/employees/{{id}}
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ### POST an employee
-POST http://localhost:3000/api/employees
+POST http://localhost:4000/api/employees
 Content-Type: application/json
 
 {
@@ -55,7 +55,7 @@ Content-Type: application/json
 
 ### POST an employee
 # @name createEmployeeToDelete
-POST http://localhost:3000/api/employees
+POST http://localhost:4000/api/employees
 Content-Type: application/json
 
 {
@@ -71,10 +71,10 @@ Content-Type: application/json
 
 ### DELETE an employee
 @idToDelete = {{createEmployeeToDelete.response.body.data.id}}
-DELETE http://localhost:3000/api/employees/{{idToDelete}}
+DELETE http://localhost:4000/api/employees/{{idToDelete}}
 
 ### PATCH an employee
-PATCH http://localhost:3000/api/employees/{{idToDelete}}
+PATCH http://localhost:4000/api/employees/{{idToDelete}}
 Content-Type: application/json
 
 {
@@ -84,4 +84,4 @@ Content-Type: application/json
 }
 
 ### DELETE an employee
-DELETE http://localhost:3000/api/employees/{{idToDelete}}
+DELETE http://localhost:4000/api/employees/{{idToDelete}}
