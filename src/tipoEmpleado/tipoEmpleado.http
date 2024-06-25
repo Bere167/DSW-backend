@@ -1,9 +1,11 @@
-### GET all employees
-GET http://localhost:4000/api/employees
+### obteter todos los empleados
+GET http://localhost:4000/api/tipoEmpleado
 
-### POST an employee
-# @name createEmployee
-POST http://localhost:4000/api/employees
+### obteter un empleado
+GET http://localhost:4000/api/tipoEmpleado/user-jperez-2024-1234-dsw
+
+### crear un nuevo empleado
+POST http://localhost:4000/api/tipoEmpleado
 Content-Type: application/json
 
 {
@@ -17,14 +19,9 @@ Content-Type: application/json
     "usuario": "juanp"
 }
 
-### ID
-@id = {{createEmployee.response.body.data.id}}
 
-### GET one employee
-GET http://localhost:4000/api/employees/{{id}}
-
-### PUT an employee
-PUT http://localhost:4000/api/employees/{{id}}
+### modificar un empleado (PUT - recurso completo e idempotente)
+PUT http://localhost:4000/api/tipoEmpleado/user-jperez-2024-1234-dsw
 Content-Type: application/json
 
 {
@@ -34,54 +31,17 @@ Content-Type: application/json
     "tel": "5544332211",
     "mail": "maria.lopez@example.com",
     "domicilio": "Avenida Siempreviva 742",
-    "cuil": "27-87654321-4",
     "usuario": "marial"
 }
 
-### POST an employee
-POST http://localhost:4000/api/employees
-Content-Type: application/json
-
-{
-    "dni_empleado": "23456789",
-    "nombre": "Carlos",
-    "apellido": "Gomez",
-    "tel": "4455667788",
-    "mail": "carlos.gomez@example.com",
-    "domicilio": "Diagonal 123",
-    "cuil": "23-23456789-5",
-    "usuario": "carlosg"
-}
-
-### POST an employee
-# @name createEmployeeToDelete
-POST http://localhost:4000/api/employees
-Content-Type: application/json
-
-{
-    "dni_empleado": "34567890",
-    "nombre": "Ana",
-    "apellido": "Martinez",
-    "tel": "5566778899",
-    "mail": "ana.martinez@example.com",
-    "domicilio": "Callejón Diagon 456",
-    "cuil": "23-34567890-6",
-    "usuario": "anam"
-}
-
-### DELETE an employee
-@idToDelete = {{createEmployeeToDelete.response.body.data.id}}
-DELETE http://localhost:4000/api/employees/{{idToDelete}}
-
-### PATCH an employee
-PATCH http://localhost:4000/api/employees/{{idToDelete}}
+### modificar un atrubuto de un empleado 
+PATCH http://localhost:4000/api/tipoEmpleado/user-jperez-2024-1234-dsw
 Content-Type: application/json
 
 {
     "tel": "6677889900",
-    "domicilio": "Calle Nueva 789",
-    "usuario": "anamod"
+    "domicilio": "Calle Nueva 789"
 }
 
-### DELETE an employee
-DELETE http://localhost:4000/api/employees/{{idToDelete}}
+### borrar un tipo producto
+DELETE http://localhost:4000/api/tipoEmpleado/user-jperez-2024-1234-dsw

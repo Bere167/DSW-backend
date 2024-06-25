@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { TipoEmpleadoRepository } from './tipoEmpleado.repository';
-import { TipoEmpleado } from './tipoEmpleado.entity';
+import { TipoEmpleadoRepository } from './tipoEmpleado.repository.js';
+import { TipoEmpleado } from './tipoEmpleado.entity.js';
 
 const repository = new TipoEmpleadoRepository();
 

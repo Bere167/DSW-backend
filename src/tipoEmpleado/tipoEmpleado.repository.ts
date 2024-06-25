@@ -1,5 +1,5 @@
-import { Repository } from "../shared/repository";
-import { TipoEmpleado } from "./tipoEmpleado.entity";
+import { Repository } from "../shared/repository.js";
+import { TipoEmpleado } from "./tipoEmpleado.entity.js";
 
 const tipoEmpleados: TipoEmpleado[] = [
   new TipoEmpleado(
