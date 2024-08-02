@@ -1,51 +1,34 @@
+import { ObjectId } from "mongodb";
 import { Repository } from "../shared/repository.js";
 import { TipoEmpleado } from "./tipoEmpleado.entity.js";
+import { db } from "../shared/db/conn.js";
 
-const tipoEmpleados: TipoEmpleado[] = [
-  new TipoEmpleado(
-    '12345678',
-    'Juan',
-    'Perez',
-    '123456789',
-    'juan.perez@example.com',
-    'Calle Falsa 123',
-    '20-12345678-9',
-    'jperez',
-    'user-jperez-2024-1234-dsw',
-  ),
-];
+const tiposEmpleado = db.collection<TipoEmpleado>('tiposEmpleado');
 
 export class TipoEmpleadoRepository implements Repository<TipoEmpleado> {
   
-  public findAll(): TipoEmpleado[] | undefined {
-    return tipoEmpleados;
+  public async findAll(): Promise <TipoEmpleado[] | undefined> {
+    return  await tiposEmpleado.find().toArray()
   }
 
-  public findOne(item: { id: string }): TipoEmpleado | undefined {
-    return tipoEmpleados.find((tipoEmpleado) => tipoEmpleado.id === item.id);
+  public async findOne(item: { id: string }): Promise<TipoEmpleado | undefined> {
+    const _id= new ObjectId(item.id);
+    return (await tiposEmpleado.findOne({_id})) || undefined;
   }
 
-  public add(item: TipoEmpleado): TipoEmpleado | undefined {
-    tipoEmpleados.push(item);
+  public async add(item: TipoEmpleado): Promise<TipoEmpleado | undefined> {
+    item._id = (await tiposEmpleado.insertOne(item)).insertedId;
     return item;
   }
 
-  public update(item: TipoEmpleado): TipoEmpleado | undefined {
-    const tipoEmpleadoIdx = tipoEmpleados.findIndex((tipoEmpleado) => tipoEmpleado.id === item.id);
-
-    if (tipoEmpleadoIdx !== -1) {
-      tipoEmpleados[tipoEmpleadoIdx] = { ...tipoEmpleados[tipoEmpleadoIdx], ...item };
-    }
-    return tipoEmpleados[tipoEmpleadoIdx];
+  public async update(id:string, item: TipoEmpleado): Promise <TipoEmpleado | undefined> {
+    const _id = new ObjectId(item._id);
+    return (await tiposEmpleado.findOneAndUpdate({_id}, {$set: item}, {returnDocument: 'after'})) || undefined;
   }
 
-  public delete(item: { id: string }): TipoEmpleado | undefined {
-    const tipoEmpleadoIdx = tipoEmpleados.findIndex((tipoEmpleado) => tipoEmpleado.id === item.id);
-
-    if (tipoEmpleadoIdx !== -1) {
-      const deletedTipoEmpleado = tipoEmpleados[tipoEmpleadoIdx];
-      tipoEmpleados.splice(tipoEmpleadoIdx, 1);
-      return deletedTipoEmpleado;
+  public async delete(item: { id: string }): Promise<TipoEmpleado | undefined> {
+    const _id = new ObjectId(item.id);
+      return (await tiposEmpleado.findOneAndDelete({_id})) || undefined;
     }
   }
-}
+

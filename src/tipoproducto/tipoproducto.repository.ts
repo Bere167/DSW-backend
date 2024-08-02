@@ -1,46 +1,35 @@
 import { Repository } from "../shared/repository.js";
 import { TipoProducto } from "./tipoproducto.entity.js";
+import {db} from "../shared/db/conn.js";
+import { ObjectId } from "mongodb";
 
-const tipoproducto = [
-  new TipoProducto(
-    'Procesador',
-    'El procesador es la pieza central del rendimiento de los programas.',
-    'a02b91bc-3769-4221-beb1-d7a3aeba7dad'
-  ),
-]
+
+const tiposproducto = db.collection<TipoProducto>('tiposproducto')
 
 export class TipoProductoRepository implements Repository<TipoProducto>{
 
-   public findAll(): TipoProducto[] | undefined {
-    return tipoproducto
+   public async findAll(): Promise<TipoProducto[] | undefined> {
+    return await tiposproducto.find().toArray()
   }
 
-  public findOne(item: { id: string }): TipoProducto | undefined {
-    return tipoproducto.find((tipoproducto) => tipoproducto.id === item.id)
+  public async findOne(item: { id: string }): Promise<TipoProducto | undefined> {
+    const _id = new ObjectId(item.id);
+    return (await tiposproducto.findOne({_id})) || undefined
 
   }
 
-  public add(item: TipoProducto): TipoProducto | undefined {
-    tipoproducto.push(item)
+  public async  add(item: TipoProducto): Promise<TipoProducto | undefined> {
+    item._id=(await tiposproducto.insertOne(item)).insertedId
     return item
   }
 
-  public update(item: TipoProducto): TipoProducto | undefined {
-    const tipoproductoIdx = tipoproducto.findIndex((tipoproducto) => tipoproducto.id === item.id)
-
-    if (tipoproductoIdx !== -1) {
-      tipoproducto[tipoproductoIdx] = { ...tipoproducto[tipoproductoIdx], ...item }
-    }
-    return tipoproducto[tipoproductoIdx]
+  public async update(id:string, item: TipoProducto): Promise<TipoProducto | undefined> {
+    const _id = new ObjectId(id);
+    return (await tiposproducto.findOneAndUpdate({_id}, {$set: item}, {returnDocument: 'after'})) || undefined
   }
 
-  public delete(item: { id: string }): TipoProducto | undefined {
-    const tipoproductoIdx = tipoproducto.findIndex((tipoproducto) => tipoproducto.id === item.id)
-
-    if (tipoproductoIdx !== -1) {
-      const deletedTiposproducto = tipoproducto[tipoproductoIdx]
-      tipoproducto.splice(tipoproductoIdx, 1)
-      return deletedTiposproducto
+  public async delete(item: { id: string }): Promise<TipoProducto | undefined> {
+    const _id = new ObjectId(item.id);
+      return (await tiposproducto.findOneAndDelete({_id})) || undefined
     }
   } 
-}

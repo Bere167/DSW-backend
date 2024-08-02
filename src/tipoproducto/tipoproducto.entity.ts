@@ -1,9 +1,10 @@
+import { ObjectId } from 'mongodb';
 import crypto from 'node:crypto'
 
 export class TipoProducto {
   constructor(
     public name: string,
     public descprod: string,
-    public id = crypto.randomUUID()
+    public _id ?: ObjectId
   ) {}
 }

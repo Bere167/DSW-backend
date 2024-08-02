@@ -20,15 +20,15 @@ function sanitizeTipoClienteInput(req: Request, res: Response, next: NextFunctio
 }
 
 //obtener una lista de todos los tipos de cliente
-function findAll(req:Request,res:Response){
-     res.json({data:repository.findAll()})
+ async function findAll(req:Request,res:Response){
+     res.json({data: await repository.findAll()})
 }
 
 
 //obtener un tipo cliente por id
-function findOne(req:Request,res:Response){
-  
-  const tipocliente = repository.findOne({id:req.params.id})
+async function findOne(req:Request,res:Response){
+  const id= req.params.id
+  const tipocliente = await repository.findOne({id:req.params.id})
   if(!tipocliente){
     return res.status(404).send({message:'Cliente no encontrado'})
   }
@@ -36,7 +36,7 @@ function findOne(req:Request,res:Response){
 }
 
 //crear un tipo cliente
-function add (req:Request,res:Response){
+async function add (req:Request,res:Response){
   const input= req.body.sanitizedInput
   
   const tipoclienteInput = new TipoCliente(
@@ -45,14 +45,13 @@ function add (req:Request,res:Response){
     input.porcdescuento
   )
 
-  const tipocliente = repository.add(tipoclienteInput)
+  const tipocliente = await repository.add(tipoclienteInput)
   return res.status(201).send({message:'Cliente creado exitosamente',data:tipocliente})
 }
 
 //modificar un tipo cliente (todas las propiedades)
-function update(req:Request,res:Response){
-  req.body.id = req.params.id
-  const tipocliente = repository.update(req.body)
+async function update(req:Request,res:Response){
+  const tipocliente = await repository.update(req.params.id,req.body)
   
   if (!tipocliente){
     return res.status(404).send({ message: 'Cliente no encontrado' });
@@ -62,9 +61,9 @@ function update(req:Request,res:Response){
 }
 
 //borrar un tipo cliente
-function remove (req:Request,res:Response){
+async function remove (req:Request,res:Response){
 const id= req.params.id
-const tipocliente = repository.delete({id:req.params.id})
+const tipocliente = await repository.delete({id})
 
  if (!tipocliente) {
     return res.status(404).send({ message: 'Cliente no encontrado' });

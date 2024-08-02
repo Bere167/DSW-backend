@@ -25,13 +25,13 @@ function sanitizeTipoEmpleadoInput(req: Request, res: Response, next: NextFuncti
 }
 
 // Obtener una lista de todos los tipos de empleado
-function findAll(req: Request, res: Response) {
-  res.json({ data: repository.findAll() });
+async function findAll(req: Request, res: Response) {
+  res.json({ data:  await repository.findAll() });
 }
 
 // Obtener un tipo de empleado por id
-function findOne(req: Request, res: Response) {
-  const tipoEmpleado = repository.findOne({ id: req.params.id });
+async function findOne(req: Request, res: Response) {
+  const tipoEmpleado = await repository.findOne({ id: req.params.id });
   if (!tipoEmpleado) {
     return res.status(404).send({ message: 'Empleado no encontrado' });
   }
@@ -39,7 +39,7 @@ function findOne(req: Request, res: Response) {
 }
 
 // Crear un tipo de empleado
-function add(req: Request, res: Response) {
+async function add(req: Request, res: Response) {
   const input = req.body.sanitizedInput;
 
   const tipoEmpleadoInput = new TipoEmpleado(
@@ -53,14 +53,13 @@ function add(req: Request, res: Response) {
     input.usuario
   );
 
-  const tipoEmpleado = repository.add(tipoEmpleadoInput);
+  const tipoEmpleado = await repository.add(tipoEmpleadoInput);
   return res.status(201).send({ message: 'Empleado creado exitosamente', data: tipoEmpleado });
 }
 
 // Modificar un tipo de empleado (todas las propiedades)
-function update(req: Request, res: Response) {
-  req.body.id = req.params.id;
-  const tipoEmpleado = repository.update(req.body);
+async function update(req: Request, res: Response) {
+  const tipoEmpleado = await repository.update(req.params.id, req.body);
 
   if (!tipoEmpleado) {
     return res.status(404).send({ message: 'Empleado no encontrado' });
@@ -70,9 +69,9 @@ function update(req: Request, res: Response) {
 }
 
 // Borrar un tipo de empleado
-function remove(req: Request, res: Response) {
+async function remove(req: Request, res: Response) {
   const id = req.params.id;
-  const tipoEmpleado = repository.delete({ id: req.params.id });
+  const tipoEmpleado = await repository.delete({ id: req.params.id });
 
   if (!tipoEmpleado) {
     return res.status(404).send({ message: 'Empleado no encontrado' });

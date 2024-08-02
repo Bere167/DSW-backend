@@ -19,14 +19,13 @@ function sanitizeTipoProductoInput(req: Request, res: Response, next: NextFuncti
   })
   next()
 }
-
-function findAll(req:Request, res:Response) {
-  res.json({data:repository.findAll() })
+async function findAll(req:Request, res:Response) {
+  res.json({data:await repository.findAll() })
 }
 
-function findOne(req:Request, res:Response) {
+async function findOne(req:Request, res:Response) {
   const id = req.params.id
-  const tipoproducto = repository.findOne({id})
+  const tipoproducto = await repository.findOne({id})
   if (!tipoproducto) {
     return res.status(404).send({ message: 'Tipo producto no encontrado' })
     
@@ -34,7 +33,7 @@ function findOne(req:Request, res:Response) {
   res.json({data:tipoproducto})
 }
 
-function add(req:Request, res:Response) {
+async function add(req:Request, res:Response) {
   const input = req.body.sanitizedInput
 
   const tipoproductoInput = new TipoProducto(
@@ -42,14 +41,13 @@ function add(req:Request, res:Response) {
     input.descprod
   )
 
-  const tipoproducto = repository.add(tipoproductoInput)
+  const tipoproducto = await repository.add(tipoproductoInput)
   return res.status(201).send({ message: 'Tipo de Producto creado exitosamente', data: tipoproducto })
 }
 
 
-function update(req: Request, res: Response) {
-  req.body.sanitizedInput.id = req.params.id
-  const tipoproducto = repository.update(req.body.sanitizedInput)
+async function update(req: Request, res: Response) {
+  const tipoproducto = await repository.update(req.params.id,req.body.sanitizedInput)
 
   if (!tipoproducto) {
     return res.status(404).send({ message: 'Tipo de Producto no encontrado' })
@@ -59,9 +57,9 @@ function update(req: Request, res: Response) {
 }
 
 
-function remove(req:Request, res:Response) {
+async function remove(req:Request, res:Response) {
   const id  = req.params.id
-  const tipoproducto = repository.delete({id})
+  const tipoproducto = await repository.delete({id})
 
   if (!tipoproducto) {
     res.status(404).send({ message: 'Tipo de producto no encontrado' })
