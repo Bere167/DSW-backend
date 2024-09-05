@@ -2,7 +2,7 @@
 GET http://localhost:4000/api/tiposcliente
 
 ### obtener un character
-GET http://localhost:4000/api/tiposcliente/66ad0d42151a1ac55e8617c1
+GET http://localhost:4000/api/tiposcliente/66c79b3f3070ecbcef8617bf
 
 ### crear un nuevo character
 POST http://localhost:4000/api/tiposcliente

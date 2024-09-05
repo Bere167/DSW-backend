@@ -2,7 +2,7 @@
 GET http://localhost:4000/api/tipoproducto
 
 ### obtener un tipo producto
-GET http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+GET http://localhost:4000/api/tipoproducto/66d7c0d6692d5b50ec8617c0
 
 ### crear un nuevo tipo producto
 POST http://localhost:4000/api/tipoproducto

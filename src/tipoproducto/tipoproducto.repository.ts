@@ -4,7 +4,7 @@ import {db} from "../shared/db/conn.js";
 import { ObjectId } from "mongodb";
 
 
-const tiposproducto = db.collection<TipoProducto>('tiposproducto')
+const tiposproducto = db.collection<TipoProducto>('tiposProducto')
 
 export class TipoProductoRepository implements Repository<TipoProducto>{
 
