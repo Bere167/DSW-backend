@@ -1,34 +1,36 @@
 ### obtener todos los tipo producto
 GET http://localhost:4000/api/tipoproducto
 
-### obtener un tipo producto
-GET http://localhost:4000/api/tipoproducto/66d7c0d6692d5b50ec8617c0
+### obtener un tipo producto por su id
+GET http://localhost:4000/api/tipoproducto/1
+
+###obtener un tipo producto por su nombre
 
 ### crear un nuevo tipo producto
 POST http://localhost:4000/api/tipoproducto
 Content-Type: application/json
 
 {
-  "name": "Gabinete",
-  "descprod": "Contendrá todos los componentes funcionales de la misma"
+  "nombre_tipo": "Procesadores"
 }
 
+
 ### modificar un tipo producto (PUT - recurso completo e idempotente)
-PUT http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+PUT http://localhost:4000/api/tipoproducto/1
 Content-Type: application/json
 
 {
-  "name": "Memoria",
-  "descprod": "Las memorias sirven para cargar y almacenar todas las instrucciones que se ejecutan en el procesador"  
+  "nombre_tipo": "Memoria", 
+  "desc_tipo": "La memoria RAM (Random Access Memory) es un tipo de memoria volátil que se utiliza para almacenar datos e instrucciones de programas que la CPU necesita acceder rápidamente mientras el sistema está en funcionamiento."
 
 }
 ### modificar un tipo producto (PATCH - recurso parcial)
-PATCH http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+PATCH http://localhost:4000/api/tipoproducto/6
 Content-Type: application/json
 
 {
-  "descprod": "Una unidad central de procesamiento, o CPU, es una pieza de hardware que permite que tu computadora interactúe con todas las aplicaciones y programas instalados." 
+  "desc_tipo": "Una unidad central de procesamiento, o CPU, es una pieza de hardware que permite que tu computadora interactúe con todas las aplicaciones y programas instalados." 
 }
 
 ### borrar un tipo producto
-DELETE http://localhost:4000/api/tipoproducto/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+DELETE http://localhost:4000/api/tipoproducto/3

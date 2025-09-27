@@ -6,8 +6,8 @@ const repository = new TipoProductoRepository()
 
 function sanitizeTipoProductoInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
-    name: req.body.name,
-    descprod: req.body.descprod,
+    nombre_tipo: req.body.nombre_tipo,
+    desc_tipo: req.body.desc_tipo,
 
   }
   //more checks here
@@ -37,8 +37,8 @@ async function add(req:Request, res:Response) {
   const input = req.body.sanitizedInput
 
   const tipoproductoInput = new TipoProducto(
-    input.name,
-    input.descprod
+    input.nombre_tipo,
+    input.desc_tipo
   )
 
   const tipoproducto = await repository.add(tipoproductoInput)

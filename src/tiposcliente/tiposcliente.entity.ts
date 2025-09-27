@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import  crypto from 'node:crypto';
 
 export class TipoCliente {
@@ -6,6 +5,6 @@ export class TipoCliente {
     public tiposclienteClass: string, 
     public desctipo: string,
     public porcdescuento: GLfloat,
-    public _id?: ObjectId
+    public _id?: number
   ) {}
 }

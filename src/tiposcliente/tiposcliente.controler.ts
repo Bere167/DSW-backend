@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction } from 'express'
+/*import {Request, Response, NextFunction } from 'express'
 import { TiposclienteRepository } from './tiposcliente.repository.js'
 import { TipoCliente } from './tiposcliente.entity.js'
 
@@ -72,3 +72,4 @@ const tipocliente = await repository.delete({id})
 }
 
 export{sanitizeTipoClienteInput, findAll, findOne, add, update, remove}
+*/

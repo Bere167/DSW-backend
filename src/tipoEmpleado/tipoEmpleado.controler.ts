@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+/*import { Request, Response, NextFunction } from 'express';
 import { TipoEmpleadoRepository } from './tipoEmpleado.repository.js';
 import { TipoEmpleado } from './tipoEmpleado.entity.js';
 
@@ -81,3 +81,4 @@ async function remove(req: Request, res: Response) {
 }
 
 export { sanitizeTipoEmpleadoInput, findAll, findOne, add, update, remove };
+*/

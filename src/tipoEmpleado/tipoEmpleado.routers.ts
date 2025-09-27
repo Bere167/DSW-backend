@@ -1,4 +1,4 @@
-import { Router } from 'express';
+/*import { Router } from 'express';
 import { sanitizeTipoEmpleadoInput,findAll, findOne, add, update, remove  } from './tipoEmpleado.controler.js';
 
 export const tipoEmpleadoRouter = Router();
@@ -15,4 +15,4 @@ tipoEmpleadoRouter.patch('/:id', update)
 
 tipoEmpleadoRouter.delete('/:id',remove);
 
-
+*/

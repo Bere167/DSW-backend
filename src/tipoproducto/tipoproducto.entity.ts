@@ -1,10 +1,8 @@
-import { ObjectId } from 'mongodb';
 import crypto from 'node:crypto'
 
 export class TipoProducto {
   constructor(
-    public name: string,
-    public descprod: string,
-    public _id ?: ObjectId
-  ) {}
-}
+    public nombre_tipo: string,
+    public desc_tipo ?: string,
+    public id ?: number
+  ) {}}

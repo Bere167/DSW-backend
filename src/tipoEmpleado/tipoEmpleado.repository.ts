@@ -1,11 +1,8 @@
-import { ObjectId } from "mongodb";
 import { Repository } from "../shared/repository.js";
 import { TipoEmpleado } from "./tipoEmpleado.entity.js";
-import { db } from "../shared/db/conn.js";
 
-const tiposEmpleado = db.collection<TipoEmpleado>('tiposEmpleado');
 
-export class TipoEmpleadoRepository implements Repository<TipoEmpleado> {
+/*export class TipoEmpleadoRepository implements Repository<TipoEmpleado> {
   
   public async findAll(): Promise <TipoEmpleado[] | undefined> {
     return  await tiposEmpleado.find().toArray()
@@ -31,4 +28,4 @@ export class TipoEmpleadoRepository implements Repository<TipoEmpleado> {
       return (await tiposEmpleado.findOneAndDelete({_id})) || undefined;
     }
   }
-
+*/
