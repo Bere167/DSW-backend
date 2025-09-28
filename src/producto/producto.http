@@ -1,0 +1,41 @@
+### obtener todos los productos
+GET http://localhost:4000/api/producto
+
+### obtener un producto por su id
+GET http://localhost:4000/api/producto/1
+
+### crear un nuevo producto
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+
+{
+  "nombre_prod": "Monitor Samsung Curvo",
+  "precio": 62000,
+  "desc_prod": "Monitor LED curvo de 24 pulgadas con resolución Full HD y tecnología Eye Saver.",
+  "cant_stock": 18,
+  "imagen": "samsung_24_curvo.jpg",
+  "id_tipoprod": 2
+}
+
+### modificar un producto (PUT - recurso completo e idempotente)
+PUT http://localhost:4000/api/producto/1
+Content-Type: application/json
+
+{
+  "nombre_prod": "SSD Kingston 960GB",
+  "precio": 65000,
+  "desc_prod": "Disco sólido Kingston de 960GB para alto rendimiento.",
+  "cant_stock": 10,
+  "imagen": "ssd_kingston_960.jpg",
+  "id_tipoprod": 1
+}
+
+### modificar un producto (PATCH - recurso parcial)
+PATCH http://localhost:4000/api/producto/1
+Content-Type: application/json
+
+{
+}
+
+### borrar un producto
+DELETE http://localhost:4000/api/producto/3

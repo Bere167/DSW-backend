@@ -10,8 +10,8 @@ function sanitizeTipoProductoInput(req: Request, res: Response, next: NextFuncti
     desc_tipo: req.body.desc_tipo,
 
   }
-  //more checks here
-
+  
+ // Elimina campos undefined
    Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
       delete req.body.sanitizedInput[key]
