@@ -38,4 +38,4 @@ Content-Type: application/json
 }
 
 ### borrar un producto
-DELETE http://localhost:4000/api/producto/3
+DELETE http://localhost:4000/api/producto/6

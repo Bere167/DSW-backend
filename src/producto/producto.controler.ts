@@ -139,12 +139,13 @@ async function update(req: Request, res: Response) {
 
 async function remove(req: Request, res: Response) {
   const id = req.params.id;
-  const producto = await repository.delete({ id });
-  if (!producto) {
-    res.status(404).send({ message: 'Producto no encontrado' });
-  } else {
-    res.status(200).send({ message: 'Producto borrado exitosamente' });
+  // Validar que el producto exista antes de borrar
+  const productoActual = await repository.findOne({ id });
+  if (!productoActual) {
+    return res.status(404).send({ message: 'Producto no encontrado' });
   }
+  await repository.delete({ id });
+  return res.status(200).send({ message: 'Producto borrado exitosamente' });
 }
 
 export { sanitizeProductoInput, findAll, findOne, add, update, remove };
