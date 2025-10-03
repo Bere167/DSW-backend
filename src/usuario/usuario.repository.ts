@@ -10,7 +10,7 @@ export class UsuarioRepository implements Repository<Usuario> {
   }
 
   public async findOne(item: { id: string }): Promise<Usuario | undefined> {
-    const id = String(item.id);
+    const id = Number.parseInt(item.id);
     const [usuarios] = await pool.query<RowDataPacket[]>('SELECT * FROM usuario WHERE id_usuario = ?', [id]);
     if (usuarios.length === 0) {
       return undefined;
@@ -63,15 +63,6 @@ export class UsuarioRepository implements Repository<Usuario> {
         throw new Error('Usuario no encontrado');
       }
   
-      /*// Si se modifica el tipo de producto, validar que exista
-      if (
-        item.id_tipoprod !== undefined &&
-        item.id_tipoprod !== productoActual.id_tipoprod
-      ) {
-        if (!(await this.tipoProductoExists(item.id_tipoprod))) {
-          throw new Error('El tipo de producto especificado no existe');
-        }
-      }*/
       const fields = [];
       const values = [];
   
@@ -98,10 +89,6 @@ export class UsuarioRepository implements Repository<Usuario> {
       if (item.tipo_usuario !== undefined) {
         fields.push('tipo_usuario = ?');
         values.push(item.tipo_usuario);
-      }
-      if (item.email_usuario !== undefined) {
-        fields.push('email_usuario = ?');
-        values.push(item.email_usuario);
       }
       if (item.user_usuario !== undefined) {
         fields.push('user_usuario = ?');

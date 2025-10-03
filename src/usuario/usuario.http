@@ -1,8 +1,86 @@
-POST http://localhost:4000/login
+### 1. REGISTRO (Público) - Crear nuevo usuario
+POST http://localhost:4000/api/usuario/add
 Content-Type: application/json
 
 {
-  "tipo_usuario": "Cliente",
+  "user_usuario": "bere167",
+  "contraseña": "bere167",
+  "email_usuario": "bere@email.com",
+  "tel_usuario": 123456789,
+  "direccion_usuario": "Calle 123",
+  "nombre_usuario": "Berenice",
+  "apellido_usuario": "López"
+}
+
+###
+
+### 2. LOGIN (Público) - Obtener token
+POST http://localhost:4000/api/usuario/login
+Content-Type: application/json
+
+{
   "user_usuario": "bere167",
   "contraseña": "bere167"
 }
+
+###
+
+### 3. VER MI PERFIL (Requiere token de usuario)
+GET http://localhost:4000/api/usuario/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
+
+###
+
+### 4. EDITAR MI PERFIL (Requiere token de usuario)
+PUT http://localhost:4000/api/usuario/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
+
+{
+  "nombre_usuario": "Berenice Actualizada",
+  "apellido_usuario": "López Actualizada",
+  "tel_usuario": 987654321
+}
+
+###
+
+### 5. VER TODOS LOS USUARIOS (Solo admin)
+GET http://localhost:4000/api/usuario/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUwNjEyNywiZXhwIjoxNzU5NTA5NzI3fQ.m_GhebyAeW6DWBXsAG1Kp6WNrvOiz5jYSSpsfO72QkM
+
+###
+
+### 6. VER USUARIO ESPECÍFICO (Solo admin)
+GET http://localhost:4000/api/usuario/2
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+
+###
+
+### 7. EDITAR CUALQUIER USUARIO (Solo admin)
+PUT http://localhost:4000/api/usuario/1
+Content-Type: application/json
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+
+{
+  "tipo_usuario": 1,
+  "nombre_usuario": "Admin"
+}
+
+###
+
+### 8. ELIMINAR USUARIO (Solo admin)
+DELETE http://localhost:4000/api/usuario/1
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+
+###
+
+### 9. LOGIN COMO ADMIN (Primero crear admin en BD)
+POST http://localhost:4000/api/usuario/login
+Content-Type: application/json
+
+{
+  "user_usuario": "admin",
+  "contraseña": "admin123"
+}
+
+

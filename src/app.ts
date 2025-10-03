@@ -1,6 +1,7 @@
 import express from "express"
 import { tipoproductoRouter} from "./tipoproducto/tipoproducto.routers.js";
 import { productoRouter } from "./producto/producto.router.js";
+import { usuarioRouter } from "./usuario/usuario.routers.js";
 
 
 const app = express()
@@ -9,6 +10,7 @@ app.use(express.json())
 
 app.use('/api/tipoproducto',tipoproductoRouter)
 app.use('/api/producto', productoRouter)
+app.use('/api/usuario', usuarioRouter)
 
 //para cuando el url esta mal escrito
 app.use((req, res) => {

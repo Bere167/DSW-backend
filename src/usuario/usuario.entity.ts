@@ -9,6 +9,6 @@ export class Usuario {
     public direccion_usuario: string,
     public nombre_usuario: string,
     public apellido_usuario: string,
-    public tipo_usuario: string,
-    public id_usuario : number
+    public tipo_usuario: number,
+    public id_usuario?: number
   ) {}}

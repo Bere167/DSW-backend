@@ -5,7 +5,11 @@ import { Request, Response, NextFunction } from 'express';
 
 config();
 
-const secret = process.env.SECRET as string;
+const secret = process.env.SECRET;
+
+if (!secret) {
+  throw new Error('SECRET no está configurado en las variables de entorno');
+}
 
 const ROLES = {
   ADMIN: 1,
@@ -39,6 +43,12 @@ export const validateToken = (
   }
 
   const token = authHeader.split(' ')[1];
+
+  if (!token) {
+    res.status(401).json({ message: 'Formato de token inválido' });
+    return;
+  }
+
   jwt.verify(token, secret, (err, decoded) => {
     if (err) {
       res.status(401).json({ message: 'Su sesión expiró, ingrese nuevamente' });
@@ -54,6 +64,10 @@ export const isAdmin = (
   res: Response,
   next: NextFunction
 ): void => {
+  if (!req.user) {
+    res.status(401).json({ message: 'Usuario no autenticado' });
+    return;
+  }
   const user = req.user as UserPayload;
   if (user?.tipo_usuario === ROLES.ADMIN) {
     next();
