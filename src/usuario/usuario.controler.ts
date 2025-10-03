@@ -1,3 +1,4 @@
+import { generateToken } from "../middleware/token.js"
 import { Request, Response, NextFunction } from "express"
 import { UsuarioRepository } from "./usuario.repository.js"
 import { Usuario } from "./usuario.entity.js"
@@ -186,7 +187,29 @@ async function remove(req: Request, res: Response) {
   return res.status(200).send({ message: 'Usuario borrado exitosamente' });
 }
 
-export { sanitizeUsuarioInput, findAll, findOne, add, update, remove };
+async function loginUser(req: Request, res: Response) {
+  const user_usuario = req.body.user_usuario;
+  const contraseña = req.body.contraseña;
+  try {
+    const user = await repository.findOneByUser({ user: user_usuario });
+    if (user && user.contraseña === contraseña) {
+      const payload = {
+        id: user.id_usuario,
+        nombre: user.nombre_usuario,
+        tipo_usuario: Number(user.tipo_usuario), 
+        user_usuario: user_usuario,
+      };
+      const token = generateToken(payload);
+      res.json({ token, user });
+    } else {
+      res.status(404).send({ message: 'Usuario o contraseña incorrectos' });
+    }
+  } catch {
+    res.status(404).send({ message: 'Error en el LogIn' });
+  }
+}
+
+export { sanitizeUsuarioInput, findAll, findOne, add, update, remove, loginUser };
 
   
 /*EJEMPLO DE DELETE CON ID Y VALIDACION DE PEDIDOS ASOCIADOS*/
@@ -218,34 +241,6 @@ export { sanitizeUsuarioInput, findAll, findOne, add, update, remove };
 
   }
 
- 
-
-  loginUser = async (req, res) => {
-    const userName = req.body.user_usuario;
-    const pass = req.body.contrasena;
-    try {
-      const user = await this.userModel.findOne({
-        where: {
-          user_usuario: userName,
-          contrasena: pass,
-        },
-      });
-      if (user) {
-        const payload = {
-          id_usuarios: user.id_usuarios,
-          tipo_usuario: user.tipo_usuario,
-          userName: userName,
-        };
-        const token = generateToken(payload);
-        res.json({ token, user });
-      } else {
-        res.status(404).send({ message: 'Usuario no encontrado' });
-      }
-    } catch {
-      res.status(404).send({ message: 'Error en el LogIn' });
-    }
-
-  }
 
   validateExistance = async (id, nombre_usuario, email) => {
     if (id === undefined) {

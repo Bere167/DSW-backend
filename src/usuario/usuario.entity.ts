@@ -10,5 +10,5 @@ export class Usuario {
     public nombre_usuario: string,
     public apellido_usuario: string,
     public tipo_usuario: string,
-    public id_usuario ?: number
+    public id_usuario : number
   ) {}}
