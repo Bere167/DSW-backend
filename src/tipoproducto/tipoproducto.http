@@ -1,4 +1,4 @@
-### obtener todos los tipo producto
+### obtener todos los tipo producto (público)
 GET http://localhost:4000/api/tipoproducto
 
 ### obtener un tipo producto por su id
@@ -6,31 +6,71 @@ GET http://localhost:4000/api/tipoproducto/1
 
 ###obtener un tipo producto por su nombre
 
-### crear un nuevo tipo producto
-POST http://localhost:4000/api/tipoproducto
+### 7. LOGIN ADMIN (Para obtener token)
+POST http://localhost:4000/api/usuario/login
 Content-Type: application/json
 
 {
-  "nombre_tipo": "Procesadores"
+  "user_usuario": "admin",
+  "contraseña": "admin123"
+}
+
+### crear un nuevo tipo producto (Solo Admin)
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+
+{
+  "nombre_tipo": "Gabinetes"
 }
 
 
-### modificar un tipo producto (PUT - recurso completo e idempotente)
+### 4. ACTUALIZAR TIPO DE PRODUCTO COMPLETO (Solo Admin)
 PUT http://localhost:4000/api/tipoproducto/1
 Content-Type: application/json
-
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 {
-  "nombre_tipo": "Memoria", 
+  "nombre_tipo": "Memorias", 
   "desc_tipo": "La memoria RAM (Random Access Memory) es un tipo de memoria volátil que se utiliza para almacenar datos e instrucciones de programas que la CPU necesita acceder rápidamente mientras el sistema está en funcionamiento."
 
 }
-### modificar un tipo producto (PATCH - recurso parcial)
+
+### 5. ACTUALIZAR TIPO DE PRODUCTO PARCIAL (Solo Admin)
 PATCH http://localhost:4000/api/tipoproducto/6
 Content-Type: application/json
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 
 {
   "desc_tipo": "Una unidad central de procesamiento, o CPU, es una pieza de hardware que permite que tu computadora interactúe con todas las aplicaciones y programas instalados." 
 }
 
-### borrar un tipo producto
-DELETE http://localhost:4000/api/tipoproducto/3
+### 6. ELIMINAR TIPO DE PRODUCTO (Solo Admin)
+DELETE http://localhost:4000/api/tipoproducto/5
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+
+
+
+### Probando manejo de errores
+
+### CASO 2: Error - Nombre duplicado
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUxNzg2OCwiZXhwIjoxNzU5NTIxNDY4fQ.kGMTqsAOi-4g0ZZ38UpCvp0YIjyfE0WAs1iFtVM7xj4
+
+{
+  "nombre_tipo": "Memorias"
+}
+
+### CASO 3: Error - Nombre vacío
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUxNzg2OCwiZXhwIjoxNzU5NTIxNDY4fQ.kGMTqsAOi-4g0ZZ38UpCvp0YIjyfE0WAs1iFtVM7xj4
+
+{
+  "nombre_tipo": ""
+}
+
+
+### CASO 5: Error - Eliminar con productos asociados
+DELETE http://localhost:4000/api/tipoproducto/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUxNzg2OCwiZXhwIjoxNzU5NTIxNDY4fQ.kGMTqsAOi-4g0ZZ38UpCvp0YIjyfE0WAs1iFtVM7xj4

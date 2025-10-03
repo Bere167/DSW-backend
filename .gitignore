@@ -3,6 +3,8 @@ coverage
 
 # API keys and secrets
 .env
+.node-version
+.nvmrc
 
 #dependency directory
 node_modules

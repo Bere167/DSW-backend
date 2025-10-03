@@ -5,6 +5,19 @@ import { TipoProducto } from "./tipoproducto.entity.js"
 const repository = new TipoProductoRepository()
 
 function sanitizeTipoProductoInput(req: Request, res: Response, next: NextFunction) {
+  // VALIDACIÓN 1: Campo requerido
+  if (!req.body.nombre_tipo || req.body.nombre_tipo.trim() === '') {
+    return res.status(400).json({ 
+      message: 'El nombre del tipo de producto es requerido' 
+    });
+  }
+    // VALIDACIÓN 2: Longitud mínima y máxima
+  const nombreTipo = req.body.nombre_tipo.trim();
+  if (nombreTipo.length > 100) {
+    return res.status(400).json({ 
+      message: 'El nombre no puede exceder 100 caracteres' 
+    });
+  }
   req.body.sanitizedInput = {
     nombre_tipo: req.body.nombre_tipo,
     desc_tipo: req.body.desc_tipo,
@@ -36,6 +49,14 @@ async function findOne(req:Request, res:Response) {
 async function add(req:Request, res:Response) {
   const input = req.body.sanitizedInput
 
+    // VALIDACIÓN: Nombre único
+  const tipoExistente = await repository.findByName(input.nombre_tipo);
+  if (tipoExistente) {
+    return res.status(409).json({ 
+      message: 'Ya existe un tipo de producto con ese nombre' 
+    });
+  }
+
   const tipoproductoInput = new TipoProducto(
     input.nombre_tipo,
     input.desc_tipo
@@ -47,24 +68,53 @@ async function add(req:Request, res:Response) {
 
 
 async function update(req: Request, res: Response) {
-  const tipoproducto = await repository.update(req.params.id,req.body.sanitizedInput)
+  const input = req.body.sanitizedInput;
+  const id = req.params.id;
 
-  if (!tipoproducto) {
-    return res.status(404).send({ message: 'Tipo de Producto no encontrado' })
+  // VALIDACIÓN: Nombre único (excepto el actual)
+  if (input.nombre_tipo) {
+    const tipoExistente = await repository.findByName(input.nombre_tipo);
+    if (tipoExistente && tipoExistente.id !== Number.parseInt(id)) {
+      return res.status(409).json({ 
+        message: 'Ya existe un tipo de producto con ese nombre' 
+      });
+    }
   }
 
-  return res.status(200).send({ message: 'Tipo de Producto modificado exitosamente', data: tipoproducto })
+  const tipoproducto = await repository.update(id, input);
+
+  if (!tipoproducto) {
+    return res.status(404).send({ 
+      message: 'Tipo de Producto no encontrado' 
+    })
+  }
+
+  return res.status(200).send({ 
+    message: 'Tipo de Producto modificado exitosamente', 
+    data: tipoproducto 
+  })
 }
 
 
-async function remove(req:Request, res:Response) {
-  const id  = req.params.id
-  const tipoproducto = await repository.delete({id})
+async function remove(req: Request, res: Response) {
+  const id = req.params.id;
+  
+  try {
+    const tipoproducto = await repository.delete({ id });
 
-  if (!tipoproducto) {
-    res.status(404).send({ message: 'Tipo de producto no encontrado' })
-  } else {
-    res.status(200).send({ message: 'Tipo de producto borrado exitosamente' })
+    if (!tipoproducto) {
+      return res.status(404).json({ 
+        message: 'Tipo de producto no encontrado' 
+      });
+    }
+    
+    return res.status(200).json({ 
+      message: 'Tipo de producto eliminado exitosamente' 
+    });
+  } catch (error: any) {
+    return res.status(400).json({ 
+      message: error.message || 'Error al eliminar el tipo de producto' 
+    });
   }
 }
 
