@@ -53,6 +53,15 @@ async function findOne(req: Request, res: Response) {
   res.json({ data: producto });
 }
 
+async function findByName(req: Request, res: Response) {
+  const nombre = req.params.nombre;
+  const producto = await repository.findByName(nombre);
+  if (!producto) {
+    return res.status(404).send({ message: 'Producto no encontrado' });
+  }
+  res.json({ data: producto });
+}
+
 async function add(req: Request, res: Response) {
   const input = req.body.sanitizedInput;
   const error = validateProductoInput(input);

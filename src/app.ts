@@ -3,6 +3,7 @@ import { corsMiddleware } from "./middleware/cors.js";
 import { tipoproductoRouter} from "./tipoproducto/tipoproducto.routers.js";
 import { productoRouter } from "./producto/producto.router.js";
 import { usuarioRouter } from "./usuario/usuario.routers.js";
+import 'dotenv/config'
 
 
 const app = express()

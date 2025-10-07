@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.10",
+    "cords": "^1.0.4",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^4.19.2",
