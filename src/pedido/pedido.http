@@ -1,19 +1,19 @@
 # Obtener todos los pedidos
-GET http://localhost:3000/pedido
+GET http://localhost:4000/pedido
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
 
 
 ###
 
 # Obtener un pedido por ID
-GET http://localhost:3000/pedido/1
+GET http://localhost:4000/pedido/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
 
 
 ###
 
 # Crear un nuevo pedido (como cliente autenticado)
-POST http://localhost:3000/pedido
+POST http://localhost:4000/pedido
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
 
@@ -28,7 +28,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c
 ###
 
 # Cambiar el estado de un pedido (solo admin)
-PUT http://localhost:3000/pedido/1
+PUT http://localhost:4000/pedido/1
 Content-Type: application/json
 Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 
@@ -39,5 +39,5 @@ Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 ###
 
 # Eliminar un pedido (solo admin)
-DELETE http://localhost:3000/pedido/1
+DELETE http://localhost:4000/pedido/1
 Authorization: Bearer TOKEN_DE_ADMIN_AQUI
