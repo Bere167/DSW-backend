@@ -1,0 +1,43 @@
+# Obtener todos los pedidos
+GET http://localhost:3000/pedido
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
+
+
+###
+
+# Obtener un pedido por ID
+GET http://localhost:3000/pedido/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
+
+
+###
+
+# Crear un nuevo pedido (como cliente autenticado)
+POST http://localhost:3000/pedido
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
+
+
+{
+  "fecha_pedido": "2024-10-08",
+  "estado_pedido": "pendiente",
+  "total_pedido": 1500,
+  "id_usuario": 2
+}
+
+###
+
+# Cambiar el estado de un pedido (solo admin)
+PUT http://localhost:3000/pedido/1
+Content-Type: application/json
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+
+{
+  "estado_pedido": "entregado"
+}
+
+###
+
+# Eliminar un pedido (solo admin)
+DELETE http://localhost:3000/pedido/1
+Authorization: Bearer TOKEN_DE_ADMIN_AQUI
