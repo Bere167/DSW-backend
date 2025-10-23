@@ -32,8 +32,13 @@ function sanitizeTipoProductoInput(req: Request, res: Response, next: NextFuncti
   })
   next()
 }
-async function findAll(req:Request, res:Response) {
-  res.json({data:await repository.findAll() })
+async function findAll(req: Request, res: Response) {
+  try {
+    const tipos = await repository.findAll();
+    res.json({ data: tipos });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
 async function findOne(req:Request, res:Response) {

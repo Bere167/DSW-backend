@@ -5,9 +5,9 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
 
 export class ProductoRepository implements Repository<Producto> {
   public async findAll(): Promise<Producto[] | undefined> {
-    const [productos] = await pool.query('SELECT * FROM producto ORDER BY nombre_prod ASC');
-    return productos as Producto[];
-  }
+  const [productos] = await pool.query('SELECT * FROM producto WHERE activo = TRUE ORDER BY nombre_prod ASC');
+  return productos as Producto[];
+}
 
   public async findOne(item: { id: string }): Promise<Producto | undefined> {
     const id = Number.parseInt(item.id);
@@ -27,9 +27,20 @@ public async findByName(nombre_prod: string): Promise<Producto | undefined> {
   return productos[0] as Producto;
 }
 
-    private async tipoProductoExists(id_tipoprod: number): Promise<boolean> {
-    const [result] = await pool.query<RowDataPacket[]>('SELECT 1 FROM tipo_producto WHERE idtipo_producto = ?', [id_tipoprod]);
-    return result.length > 0;
+// método para admin ver TODOS (activos e inactivos):
+public async findAllIncludeInactive(): Promise<Producto[] | undefined> {
+  const [productos] = await pool.query(`
+    SELECT *, 
+    CASE WHEN activo = TRUE THEN 'Activo' ELSE 'Inactivo' END as estado_texto
+    FROM producto 
+    ORDER BY activo DESC, nombre_prod ASC
+  `);
+  return productos as Producto[];
+}
+
+private async tipoProductoExists(id_tipoprod: number): Promise<boolean> {
+  const [result] = await pool.query<RowDataPacket[]>('SELECT 1 FROM tipo_producto WHERE idtipo_producto = ?', [id_tipoprod]);
+  return result.length > 0;
   }
 
 
@@ -98,6 +109,10 @@ const itemRow = {
       fields.push('id_tipoprod = ?');
       values.push(item.id_tipoprod);
     }
+    if (item.activo !== undefined) {  
+    fields.push('activo = ?');
+    values.push(item.activo);
+  }
 
     if (fields.length === 0) return await this.findOne({ id }); // Nada que actualizar
 
@@ -110,13 +125,53 @@ const itemRow = {
   }
 
   public async delete(item: { id: string }): Promise<Producto | undefined> {
-    try {
-      const productoToDelete = await this.findOne(item);
-      const productoId = Number.parseInt(item.id);
+  try {
+    const productoToDelete = await this.findOne(item);
+    if (!productoToDelete) return undefined;
+    
+    const productoId = Number.parseInt(item.id);
+    
+    // Verificar si tiene pedidos asociados
+    const [pedidosAsociados] = await pool.query<RowDataPacket[]>(
+      'SELECT COUNT(*) as total FROM productos_pedido WHERE id_producto = ?',
+      [productoId]
+    );
+    
+    const tienePedidos = (pedidosAsociados[0] as any).total > 0;
+    
+    if (tienePedidos) {
+      // Solo marcar como inactivo
+      await pool.query('UPDATE producto SET activo = FALSE WHERE idproducto = ?', [productoId]);
+      return { ...productoToDelete, activo: false };
+      } else {
+      // Eliminar completamente
       await pool.query('DELETE FROM producto WHERE idproducto = ?', [productoId]);
       return productoToDelete;
-    } catch (error: any) {
-      throw new Error('No se puede eliminar el producto');
     }
+    
+  } catch (error: any) {
+    throw new Error('No se puede eliminar el producto');
   }
+}
+
+// método para reactivar:
+public async reactivate(item: { id: string }): Promise<Producto | undefined> {
+  const productoId = Number.parseInt(item.id);
+  await pool.query('UPDATE producto SET activo = TRUE WHERE idproducto = ?', [productoId]);
+  return await this.findOne(item);
+}
+
+public async findByTipoProducto(idTipoProducto: number): Promise<Producto[] | undefined> {
+  const [productos] = await pool.query<RowDataPacket[]>(
+    `SELECT p.*, tp.nombre_tipo 
+     FROM producto p 
+     LEFT JOIN tipo_producto tp ON p.id_tipoprod = tp.idtipo_producto 
+     WHERE p.id_tipoprod = ? AND p.activo = TRUE 
+     ORDER BY p.nombre_prod ASC`,
+    [idTipoProducto]
+  );
+
+  return productos as Producto[];
+}
+
 }

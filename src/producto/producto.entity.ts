@@ -8,5 +8,6 @@ export class Producto {
     public desc_prod ?: string,
     public cant_stock ?: number,
     public imagen ?: string,
-    public id_tipoprod ?: number // <-- clave foránea
+    public id_tipoprod ?: number, // <-- clave foránea
+    public activo: boolean = true
   ) {}}

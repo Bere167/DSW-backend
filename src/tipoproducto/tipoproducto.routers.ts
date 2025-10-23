@@ -7,7 +7,6 @@ export const tipoproductoRouter = Router()
 //Rutas públicas (sin protección)
 tipoproductoRouter.get('/', findAll)
 tipoproductoRouter.get('/:id', findOne)
-
 //Rutas protegidas (requieren estar logueado)
 
 //Rutas protegidas (requieren ser admin)

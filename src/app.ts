@@ -3,7 +3,11 @@ import { corsMiddleware } from "./middleware/cors.js";
 import { tipoproductoRouter} from "./tipoproducto/tipoproducto.routers.js";
 import { productoRouter } from "./producto/producto.router.js";
 import { usuarioRouter } from "./usuario/usuario.routers.js";
+import { productosPedidoRouter } from './productos_pedido/prod_ped.routers.js';
+
+
 import 'dotenv/config'
+import { pedidoRouter } from "./pedido/pedido.routters.js";
 
 
 const app = express()
@@ -15,6 +19,8 @@ app.use(express.json())
 app.use('/api/tipoproducto',tipoproductoRouter)
 app.use('/api/producto', productoRouter)
 app.use('/api/usuario', usuarioRouter)
+app.use('/api/pedido', pedidoRouter)
+app.use('/api', productosPedidoRouter);
 
 //para cuando el url esta mal escrito
 app.use((req, res) => {
