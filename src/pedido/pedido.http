@@ -196,7 +196,7 @@ GET http://localhost:4000/api/producto
 ### 32. ✅ Crear producto SIN pedidos para probar eliminación completa
 POST http://localhost:4000/api/producto
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE3NTgzOCwiZXhwIjoxNzYxMTc5NDM4fQ.8NnxUt9DE7Lxi42r9IDdCDXRHbtab6u_qWlFWJsgEoY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE4NDAxNiwiZXhwIjoxNzYxMTg3NjE2fQ.FvXtzoxMCDLyQ6-aLd9i4D0uc3CyXq1rJMfdhlzydrU
 
 {
   "nombre_prod": "Producto Temporal Test",
