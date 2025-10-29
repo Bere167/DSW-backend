@@ -28,11 +28,11 @@ Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 ### 4. ACTUALIZAR TIPO DE PRODUCTO COMPLETO (Solo Admin)
 PUT http://localhost:4000/api/tipoproducto/1
 Content-Type: application/json
-Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTQ1NTU4NywiZXhwIjoxNzYxNDU5MTg3fQ.z9TUGBxaxlxopuaOXA1quCpP5d9e_MssvoQLVPUaqvw
+
 {
   "nombre_tipo": "Memorias", 
-  "desc_tipo": "La memoria RAM (Random Access Memory) es un tipo de memoria volátil que se utiliza para almacenar datos e instrucciones de programas que la CPU necesita acceder rápidamente mientras el sistema está en funcionamiento."
-
+  "desc_tipo": "La memoria RAM (Random Access Memory) es un tipo de memoria volátil que se utiliza para almacenar datos e instrucciones de programas que la cpu necesita acceder rápidamente mientras el sistema está en funcionamiento."
 }
 
 ### 5. ACTUALIZAR TIPO DE PRODUCTO PARCIAL (Solo Admin)
@@ -55,7 +55,7 @@ Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 ### CASO 2: Error - Nombre duplicado
 POST http://localhost:4000/api/tipoproducto
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUxNzg2OCwiZXhwIjoxNzU5NTIxNDY4fQ.kGMTqsAOi-4g0ZZ38UpCvp0YIjyfE0WAs1iFtVM7xj4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTQ1NTU4NywiZXhwIjoxNzYxNDU5MTg3fQ.z9TUGBxaxlxopuaOXA1quCpP5d9e_MssvoQLVPUaqvw
 
 {
   "nombre_tipo": "Memorias"

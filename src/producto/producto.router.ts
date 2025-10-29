@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { sanitizeProductoInput, findAll, findOne, findByName, findByTipo, add, update, remove, findAllForAdmin, reactivate } from "./producto.controler.js";
+import { sanitizeProductoInput, findAll, findRandom, findOne, findByName, findByTipo, add, update, remove, findAllForAdmin, reactivate } from "./producto.controler.js";
 import { validateToken, isAdmin } from "../middleware/token.js";
 
 export const productoRouter = Router();
 
 // RUTAS ESPECÍFICAS PRIMERO (para evitar conflictos):
 productoRouter.get('/tipo/:idTipo', findByTipo);    
+productoRouter.get('/random', findRandom);               // Buscar aleatorio
 productoRouter.get('/todos', validateToken, isAdmin, findAllForAdmin);     // Admin: ver todos
 productoRouter.get('/nombre/:nombre', findByName);                        // Buscar por nombre
 productoRouter.put('/:id/reactivar', validateToken, isAdmin, reactivate); // Reactivar

@@ -4,17 +4,21 @@ GET http://localhost:4000/api/producto
 ### obtener un producto por su id
 GET http://localhost:4000/api/producto/1
 
+### buscar productos aleatorios
+GET http://localhost:4000/api/producto/random?cantidad=2
+
 ### crear un nuevo producto
 POST http://localhost:4000/api/producto
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTUyMDE2MywiZXhwIjoxNzYxNTIzNzYzfQ.2DXxWd4f5hAiN7dOredTSjgTgGt3z9Avb1mtjJEQPmA
 
 {
-  "nombre_prod": "Monitor Samsung Curvo",
-  "precio": 62000,
-  "desc_prod": "Monitor LED curvo de 24 pulgadas con resolución Full HD y tecnología Eye Saver.",
+  "nombre_prod": "Intel Core i9 14900K",
+  "precio": 90000,
+  "desc_prod": "Procesador Intel Core i9 de 14ª generación con 24 núcleos y 32 hilos.",
   "cant_stock": 18,
-  "imagen": "samsung_24_curvo.jpg",
-  "id_tipoprod": 2
+  "imagen": "intel_core_i9_14900k.jpg",
+  "id_tipoprod": 4
 }
 
 ### modificar un producto (PUT - recurso completo e idempotente)
@@ -30,12 +34,26 @@ Content-Type: application/json
   "id_tipoprod": 1
 }
 
-### modificar un producto (PATCH - recurso parcial)
-PATCH http://localhost:4000/api/producto/1
+### buscar productos por un tipo
+GET http://localhost:4000/api/producto/tipo/1
+
+### obtener todos los productos (con token de administrador)
+GET http://localhost:4000/api/producto/todos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTUyMDE2MywiZXhwIjoxNzYxNTIzNzYzfQ.2DXxWd4f5hAiN7dOredTSjgTgGt3z9Avb1mtjJEQPmA
+
+### modificar solo el precio de un producto (PATCH - recurso parcial y no idempotente)
+PATCH http://localhost:4000/api/producto/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTUyMDE2MywiZXhwIjoxNzYxNTIzNzYzfQ.2DXxWd4f5hAiN7dOredTSjgTgGt3z9Avb1mtjJEQPmA
 Content-Type: application/json
 
 {
+  "precio": 50000
 }
 
-### borrar un producto
-DELETE http://localhost:4000/api/producto/6
+###elimina un producto
+DELETE http://localhost:4000/api/producto/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTUyMDE2MywiZXhwIjoxNzYxNTIzNzYzfQ.2DXxWd4f5hAiN7dOredTSjgTgGt3z9Avb1mtjJEQPmA
+
+###reactiva un producto
+PUT http://localhost:4000/api/producto/1/reactivar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTUyMDE2MywiZXhwIjoxNzYxNTIzNzYzfQ.2DXxWd4f5hAiN7dOredTSjgTgGt3z9Avb1mtjJEQPmA

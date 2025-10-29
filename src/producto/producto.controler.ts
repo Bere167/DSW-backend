@@ -1,8 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { ProductoRepository } from "./producto.repository.js";
-import { Producto } from "./producto.entity.js";
-import { pool } from '../shared/db/conn.mysql.js'
-import { RowDataPacket } from 'mysql2'
 
 const repository = new ProductoRepository();
 
@@ -47,6 +44,12 @@ async function findAll(req: Request, res: Response) {
   res.json({ data: await repository.findAll() });
 }
 
+async function findRandom(req: Request, res: Response) {
+  const cantidad = Number.parseInt(req.query.cantidad as string) || 8;
+  const productos = await repository.findRandom(cantidad);
+  res.json({ data: productos });
+}
+
 async function findOne(req: Request, res: Response) {
   const id = req.params.id;
   const producto = await repository.findOne({ id });
@@ -72,23 +75,19 @@ async function add(req: Request, res: Response) {
     return res.status(400).send({ message: error });
   }
 
-   // Validar que no exista un producto con el mismo nombre
+  // Validar que no exista un producto con el mismo nombre
   const existente = await repository.findByName(input.nombre_prod);
   if (existente) {
     return res.status(409).send({ message: 'Ya existe un producto con ese nombre.' });
   }
 
-  const productoInput = new Producto(
-    input.nombre_prod,
-    input.precio,
-    undefined, // idproducto, lo asigna el repo
-    input.desc_prod,
-    input.cant_stock,
-    input.imagen,
-    input.id_tipoprod
-  );
-   try {
-    const producto = await repository.add(productoInput);
+  // Validar que el tipo de producto exista
+  if (!(await repository['tipoProductoExists'](input.id_tipoprod))) {
+    return res.status(400).send({ message: 'El tipo de producto especificado no existe.' });
+  }
+
+  try {
+    const producto = await repository.add(input);
     return res.status(201).send({ message: 'Producto creado exitosamente', data: producto });
   } catch (error: any) {
     return res.status(400).send({ message: error.message });
@@ -142,16 +141,7 @@ async function update(req: Request, res: Response) {
 
     // SI SE CAMBIA EL PRECIO, verificar pedidos asociados
     if (input.precio && input.precio !== productoExistente.precio) {
-      const [pedidosAsociados] = await pool.query<RowDataPacket[]>(
-        `SELECT COUNT(*) as total_pedidos,
-                COUNT(CASE WHEN p.estado_pedido IN ('pendiente', 'confirmado', 'preparando') THEN 1 END) as pedidos_activos
-         FROM productos_pedido pp 
-         JOIN pedido p ON pp.id_pedido = p.id_pedido 
-         WHERE pp.id_producto = ?`,
-        [id]
-      );
-      
-      const { total_pedidos, pedidos_activos } = pedidosAsociados[0] as any;
+      const { total_pedidos, pedidos_activos } = await repository.countPedidosAsociados(Number(id));
       
       // Actualizar el producto
       const updatedProducto = await repository.update(id, input);
@@ -187,32 +177,28 @@ async function update(req: Request, res: Response) {
   }
 }
 
-
 async function remove(req: Request, res: Response) {
   const id = req.params.id;
-  
+
   try {
-    const producto = await repository.delete({ id });
-    
-    if (!producto) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
+    const eliminado = await repository.delete({ id });
+    if (!eliminado) {
+      return res.status(404).json({ message: 'Producto no encontrado.' });
     }
-    
-    // Mensaje diferente según el tipo de eliminación
-    if (producto.activo === false) {
-      return res.status(200).json({ 
-        message: 'Producto ocultado exitosamente (tiene pedidos asociados). Los clientes ya no lo verán.',
-        tipo: 'soft_delete'
-      });
-    } else {
-      return res.status(200).json({ 
-        message: 'Producto eliminado exitosamente.',
-        tipo: 'hard_delete'
+
+    if (eliminado.activo === false) {
+      return res.json({
+        message: 'No se puede eliminar el producto porque tiene pedidos asociados. Se marcó como inactivo.',
+        data: eliminado
       });
     }
-    
+
+    return res.json({
+      message: 'Producto eliminado correctamente.',
+      data: eliminado
+    });
   } catch (error: any) {
-    return res.status(500).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 }
 
@@ -229,6 +215,13 @@ async function reactivate(req: Request, res: Response) {
     
     if (!producto) {
       return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+
+    if (producto.activo) {
+      return res.status(200).json({ 
+        message: 'El producto ya estaba activo.',
+        data: producto
+      });
     }
     
     return res.status(200).json({ 
@@ -271,6 +264,7 @@ async function reactivate(req: Request, res: Response) {
 export { 
   sanitizeProductoInput, 
   findAll,        // Sólo activos
+  findRandom,     // Buscar aleatorio
   findOne,      // Buscar por ID
   findByName,   // Buscar por nombre
   findByTipo,   // Buscar por tipo de producto

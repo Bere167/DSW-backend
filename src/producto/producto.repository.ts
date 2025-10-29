@@ -1,47 +1,59 @@
 import { Repository } from "../shared/repository.js";
-import { Producto } from "./producto.entity.js";
-import { pool } from '../shared/db/conn.mysql.js';
-import { ResultSetHeader, RowDataPacket } from 'mysql2';
+import { sequelize } from '../shared/db/sequelize.js';
+import { TipoProducto } from '../models/tipoproducto.model.js';
+import { Producto } from '../models/producto.model.js';
+import { ProductosPedido } from '../models/prod_ped.model.js';
+
 
 export class ProductoRepository implements Repository<Producto> {
   public async findAll(): Promise<Producto[] | undefined> {
-  const [productos] = await pool.query('SELECT * FROM producto WHERE activo = TRUE ORDER BY nombre_prod ASC');
-  return productos as Producto[];
+  return await Producto.findAll({
+    where: { activo: true },
+    order: [['nombre_prod', 'ASC']]
+  });
 }
 
-  public async findOne(item: { id: string }): Promise<Producto | undefined> {
-    const id = Number.parseInt(item.id);
-    const [productos] = await pool.query<RowDataPacket[]>('SELECT * FROM producto WHERE idproducto = ?', [id]);
-    if (productos.length === 0) {
-      return undefined;
-    }
-    return productos[0] as Producto;
-  }
+public async findRandom(cantidad: number): Promise<Producto[]> {
+  return await Producto.findAll({
+    where: { activo: true },
+    order: sequelize.random(),
+    limit: cantidad
+  });
+}
+
+public async findOne(item: { id: string }): Promise<Producto | undefined> {
+  const id = Number.parseInt(item.id);
+  const producto = await Producto.findByPk(id);
+  return producto || undefined;
+}
 
 public async findByName(nombre_prod: string): Promise<Producto | undefined> {
-  const [productos] = await pool.query<RowDataPacket[]>(
-    'SELECT * FROM producto WHERE nombre_prod = ?',
-    [nombre_prod]
-  );
-  if (productos.length === 0) return undefined;
-  return productos[0] as Producto;
+  const producto = await Producto.findOne({
+    where: { nombre_prod: nombre_prod.trim(), activo: true }
+  });
+  return producto || undefined;
 }
 
 // método para admin ver TODOS (activos e inactivos):
-public async findAllIncludeInactive(): Promise<Producto[] | undefined> {
-  const [productos] = await pool.query(`
-    SELECT *, 
-    CASE WHEN activo = TRUE THEN 'Activo' ELSE 'Inactivo' END as estado_texto
-    FROM producto 
-    ORDER BY activo DESC, nombre_prod ASC
-  `);
-  return productos as Producto[];
+public async findAllIncludeInactive(): Promise<any[] | undefined> {
+  const productos = await Producto.findAll({
+    order: [
+      ['activo', 'DESC'],
+      ['nombre_prod', 'ASC']
+    ]
+  });
+
+  // Agregar el campo estado_texto según el valor booleano
+  return productos.map(p => ({
+    ...p.toJSON(),
+    estado_texto: p.activo ? 'Activo' : 'Inactivo'
+  }));
 }
 
 private async tipoProductoExists(id_tipoprod: number): Promise<boolean> {
-  const [result] = await pool.query<RowDataPacket[]>('SELECT 1 FROM tipo_producto WHERE idtipo_producto = ?', [id_tipoprod]);
-  return result.length > 0;
-  }
+  const tipo = await TipoProducto.findByPk(id_tipoprod);
+  return !!tipo;
+} //devuelve true si existe, false si no
 
 
 public async add(item: Producto): Promise<Producto | undefined> {
@@ -50,128 +62,135 @@ public async add(item: Producto): Promise<Producto | undefined> {
     throw new Error('El tipo de producto especificado no existe');
   }
 
-const itemRow = {
-  nombre_prod: item.nombre_prod,
-  precio: item.precio,
-  desc_prod: item.desc_prod,
-  cant_stock: item.cant_stock,
-  imagen: item.imagen,
-  id_tipoprod: item.id_tipoprod
-};
+  // Validar nombre único (opcional, si lo necesitas)
+  const productoExistente = await Producto.findOne({
+    where: { nombre_prod: item.nombre_prod.trim(), activo: true }
+  });
+  if (productoExistente) {
+    throw new Error('Ya existe un producto con ese nombre');
+  }
 
-  const [result] = await pool.query<ResultSetHeader>('INSERT INTO producto SET ?', [itemRow]);
-  item.idproducto = result.insertId;
-  return item;
+  // Crear el producto
+  const nuevo = await Producto.create({
+    nombre_prod: item.nombre_prod,
+    precio: item.precio,
+    desc_prod: item.desc_prod,
+    cant_stock: item.cant_stock,
+    imagen: item.imagen,
+    id_tipoprod: item.id_tipoprod,
+    activo: item.activo !== undefined ? item.activo : true
+  });
+
+  return nuevo;
 }
 
-  public async update(id: string, item: Partial<Producto>): Promise<Producto | undefined> {
-    const productoId = Number.parseInt(id);
-    
-    // Validar que el producto exista
-    const productoActual = await this.findOne({ id });
-    if (!productoActual) {
-      throw new Error('Producto no encontrado');
-    }
+public async countPedidosAsociados(id_producto: number): Promise<{ total_pedidos: number, pedidos_activos: number }> {
+  // Busca todos los productos_pedido asociados a este producto
+  const productosPedido = await ProductosPedido.findAll({
+    where: { id_producto },
+    include: [{
+      association: 'pedido', // Asegúrate de definir la relación en el modelo si la necesitas
+      attributes: ['estado_pedido']
+    }]
+  });
 
-    // Si se modifica el tipo de producto, validar que exista
-    if (
-      item.id_tipoprod !== undefined &&
-      item.id_tipoprod !== productoActual.id_tipoprod
-    ) {
-      if (!(await this.tipoProductoExists(item.id_tipoprod))) {
-        throw new Error('El tipo de producto especificado no existe');
-      }
-    }
-    const fields = [];
-    const values = [];
+  let total_pedidos = productosPedido.length;
+  let pedidos_activos = productosPedido.filter((pp: any) =>
+    ['pendiente', 'confirmado', 'preparando'].includes(pp.pedido?.estado_pedido)
+  ).length;
 
-    if (item.nombre_prod !== undefined) {
-      fields.push('nombre_prod = ?');
-      values.push(item.nombre_prod);
-    }
-    if (item.precio !== undefined) {
-      fields.push('precio = ?');
-      values.push(item.precio);
-    }
-    if (item.desc_prod !== undefined) {
-      fields.push('desc_prod = ?');
-      values.push(item.desc_prod);
-    }
-    if (item.cant_stock !== undefined) {
-      fields.push('cant_stock = ?');
-      values.push(item.cant_stock);
-    }
-    if (item.imagen !== undefined) {
-      fields.push('imagen = ?');
-      values.push(item.imagen);
-    }
-    if (item.id_tipoprod !== undefined) {
-      fields.push('id_tipoprod = ?');
-      values.push(item.id_tipoprod);
-    }
-    if (item.activo !== undefined) {  
-    fields.push('activo = ?');
-    values.push(item.activo);
+  return { total_pedidos, pedidos_activos };
+}
+
+public async update(id: string, item: Partial<Producto>): Promise<Producto | undefined> {
+  const productoId = Number.parseInt(id);
+
+  // Validar que el producto exista
+  const productoActual = await Producto.findByPk(productoId);
+  if (!productoActual) {
+    throw new Error('Producto no encontrado');
   }
 
-    if (fields.length === 0) return await this.findOne({ id }); // Nada que actualizar
-
-    await pool.query(
-      `UPDATE producto SET ${fields.join(', ')} WHERE idproducto = ?`,
-      [...values, productoId]
-    );
-
-    return await this.findOne({ id });
+  // Si se modifica el tipo de producto, validar que exista
+  if (
+    item.id_tipoprod !== undefined &&
+    item.id_tipoprod !== productoActual.id_tipoprod
+  ) {
+    if (!(await this.tipoProductoExists(item.id_tipoprod))) {
+      throw new Error('El tipo de producto especificado no existe');
+    }
   }
 
-  public async delete(item: { id: string }): Promise<Producto | undefined> {
-  try {
-    const productoToDelete = await this.findOne(item);
-    if (!productoToDelete) return undefined;
-    
-    const productoId = Number.parseInt(item.id);
-    
-    // Verificar si tiene pedidos asociados
-    const [pedidosAsociados] = await pool.query<RowDataPacket[]>(
-      'SELECT COUNT(*) as total FROM productos_pedido WHERE id_producto = ?',
-      [productoId]
-    );
-    
-    const tienePedidos = (pedidosAsociados[0] as any).total > 0;
-    
-    if (tienePedidos) {
-      // Solo marcar como inactivo
-      await pool.query('UPDATE producto SET activo = FALSE WHERE idproducto = ?', [productoId]);
-      return { ...productoToDelete, activo: false };
-      } else {
-      // Eliminar completamente
-      await pool.query('DELETE FROM producto WHERE idproducto = ?', [productoId]);
-      return productoToDelete;
+  // Validar nombre único (opcional, si lo necesitas)
+  if (
+    item.nombre_prod &&
+    item.nombre_prod.trim() !== productoActual.nombre_prod
+  ) {
+    const productoExistente = await Producto.findOne({
+      where: {
+        nombre_prod: item.nombre_prod.trim(),
+        activo: true,
+      },
+    });
+    if (productoExistente && productoExistente.idproducto !== productoId) {
+      throw new Error('Ya existe un producto con ese nombre');
     }
-    
-  } catch (error: any) {
-    throw new Error('No se puede eliminar el producto');
+  }
+
+  // Actualizar el producto
+  await productoActual.update(item);
+  return productoActual;
+}
+
+public async delete(item: { id: string }): Promise<Producto | undefined> {
+  const productoToDelete = await this.findOne(item);
+  if (!productoToDelete) return undefined;
+
+  // Verificar si tiene pedidos asociados usando Sequelize
+  const pedidosAsociados = await ProductosPedido.count({
+    where: { id_producto: productoToDelete.idproducto }
+  });
+
+  if (pedidosAsociados > 0) {
+    // Solo marcar como inactivo
+    await productoToDelete.update({ activo: false });
+    return productoToDelete;
+  } else {
+    // Eliminar completamente
+    await productoToDelete.destroy();
+    return productoToDelete;
   }
 }
 
 // método para reactivar:
 public async reactivate(item: { id: string }): Promise<Producto | undefined> {
   const productoId = Number.parseInt(item.id);
-  await pool.query('UPDATE producto SET activo = TRUE WHERE idproducto = ?', [productoId]);
-  return await this.findOne(item);
+  const producto = await Producto.findByPk(productoId);
+  if (!producto) return undefined;
+
+  await producto.update({ activo: true });
+  return producto;
 }
 
-public async findByTipoProducto(idTipoProducto: number): Promise<Producto[] | undefined> {
-  const [productos] = await pool.query<RowDataPacket[]>(
-    `SELECT p.*, tp.nombre_tipo 
-     FROM producto p 
-     LEFT JOIN tipo_producto tp ON p.id_tipoprod = tp.idtipo_producto 
-     WHERE p.id_tipoprod = ? AND p.activo = TRUE 
-     ORDER BY p.nombre_prod ASC`,
-    [idTipoProducto]
-  );
+public async findByTipoProducto(idTipoProducto: number): Promise<any[] | undefined> {
+  const productos = await Producto.findAll({
+    where: {
+      id_tipoprod: idTipoProducto,
+      activo: true
+    },
+    include: [{
+      model: TipoProducto,
+      as: 'TipoProducto',
+      attributes: ['nombre_tipo']
+    }],
+    order: [['nombre_prod', 'ASC']]
+  });
 
-  return productos as Producto[];
+  // Devuelve los productos con el nombre del tipo incluido
+  return productos.map(p => ({
+    ...p.toJSON(),
+    nombre_tipo: p.TipoProducto?.nombre_tipo
+  }));
 }
 
 }

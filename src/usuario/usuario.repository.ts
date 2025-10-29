@@ -1,122 +1,127 @@
+import bcrypt from 'bcrypt';
 import { Repository } from "../shared/repository.js";
-import { Usuario } from "./usuario.entity.js";
-import { pool } from '../shared/db/conn.mysql.js';
-import { ResultSetHeader, RowDataPacket } from 'mysql2';
+import { Usuario } from '../models/usuario.model.js';
+import { Pedido } from '../models/pedido.model.js';
 
 export class UsuarioRepository implements Repository<Usuario> {
   public async findAll(): Promise<Usuario[] | undefined> {
-    const [usuarios] = await pool.query('SELECT * FROM usuario ORDER BY apellido_usuario ASC');
-    return usuarios as Usuario[];
+    return await Usuario.findAll({
+      order: [['apellido_usuario', 'ASC']]
+    });
   }
+
 
   public async findOne(item: { id: string }): Promise<Usuario | undefined> {
-    const id = Number.parseInt(item.id);
-    const [usuarios] = await pool.query<RowDataPacket[]>('SELECT * FROM usuario WHERE id_usuario = ?', [id]);
-    if (usuarios.length === 0) {
-      return undefined;
-    }
-    return usuarios[0] as Usuario;
-  }
+  const id = Number.parseInt(item.id);
+  const usuario = await Usuario.findByPk(id);
+  return usuario || undefined;
+}
+  
 
-  public async findOneByEmail(item: { email: string }): Promise<Usuario | undefined> {
-    const email = String(item.email);
-    const [usuarios] = await pool.query<RowDataPacket[]>('SELECT * FROM usuario WHERE email_usuario = ?', [email]);
-    if (usuarios.length === 0) {
-      return undefined;
-    }
-    return usuarios[0] as Usuario;
-  }
+  public async findOneByEmail(email_usuario: string): Promise<Usuario | undefined> {
+  const usuario = await Usuario.findOne({
+    where: { email_usuario: email_usuario.trim() }
+  });
+  return usuario || undefined;
+}
 
-   public async findOneByUser(item: { user: string }): Promise<Usuario | undefined> {
-    const user = String(item.user);
-    const [usuarios] = await pool.query<RowDataPacket[]>('SELECT * FROM usuario WHERE user_usuario = ?', [user]);
-    if (usuarios.length === 0) {
-      return undefined;
-    }
-    return usuarios[0] as Usuario;
-  }
+  public async findOneByUser(user_usuario: string): Promise<Usuario | undefined> {
+  const usuario = await Usuario.findOne({
+    where: { user_usuario: user_usuario.trim() }
+  });
+  return usuario || undefined;
+}
   
 
   public async add(item: Usuario): Promise<Usuario | undefined> {
-    const itemRow = {
-      nombre_usuario: item.nombre_usuario,
-      email_usuario: item.email_usuario,
-      tel_usuario: item.tel_usuario,
-      apellido_usuario: item.apellido_usuario,
-      direccion_usuario: item.direccion_usuario,
-      tipo_usuario: item.tipo_usuario,
-      user_usuario: item.user_usuario,
-      contraseña: item.contraseña
-    };
-
-    const [result] = await pool.query<ResultSetHeader>('INSERT INTO usuario SET ?', [itemRow]);
-    item.id_usuario = result.insertId;
-    return item;
+  // Validar que el nombre de usuario no exista
+  const existenteUser = await Usuario.findOne({ where: { user_usuario: item.user_usuario.trim() } });
+  if (existenteUser) {
+    throw new Error('Ya existe un usuario con ese nombre de usuario');
   }
+
+  // Validar que el email no exista
+  const existenteEmail = await Usuario.findOne({ where: { email_usuario: item.email_usuario.trim() } });
+  if (existenteEmail) {
+    throw new Error('Ya existe un usuario con ese email');
+  }
+
+   // Hashear la contraseña antes de guardar
+  const hash = await bcrypt.hash(item.contraseña, 10);
+
+  // Crear el usuario
+  const nuevo = await Usuario.create({
+    user_usuario: item.user_usuario.trim(),
+    contraseña: hash, // Guardar el hash, no la contraseña original
+    email_usuario: item.email_usuario.trim(),
+    tel_usuario: item.tel_usuario,
+    direccion_usuario: item.direccion_usuario,
+    nombre_usuario: item.nombre_usuario,
+    apellido_usuario: item.apellido_usuario,
+    tipo_usuario: item.tipo_usuario ?? 2 // Por defecto cliente
+  });
+
+  return nuevo;
+}
 
   public async update(id: string, item: Partial<Usuario>): Promise<Usuario | undefined> {
-    const usuarioId = Number.parseInt(id);
+  const usuarioId = Number.parseInt(id);
 
-      // Validar que el usuario exista
-      const usuarioActual = await this.findOne({ id });
-      if (!usuarioActual) {
-        throw new Error('Usuario no encontrado');
-      }
-  
-      const fields = [];
-      const values = [];
-  
-      if (item.nombre_usuario !== undefined) {
-        fields.push('nombre_usuario = ?');
-        values.push(item.nombre_usuario);
-      }
-      if (item.email_usuario !== undefined) {
-        fields.push('email_usuario = ?');
-        values.push(item.email_usuario);
-      }
-      if (item.tel_usuario !== undefined) {
-        fields.push('tel_usuario = ?');
-        values.push(item.tel_usuario);
-      }
-      if (item.apellido_usuario !== undefined) {
-        fields.push('apellido_usuario = ?');
-        values.push(item.apellido_usuario);
-      }
-      if (item.direccion_usuario !== undefined) {
-        fields.push('direccion_usuario = ?');
-        values.push(item.direccion_usuario);
-      }
-      if (item.tipo_usuario !== undefined) {
-        fields.push('tipo_usuario = ?');
-        values.push(item.tipo_usuario);
-      }
-      if (item.user_usuario !== undefined) {
-        fields.push('user_usuario = ?');
-        values.push(item.user_usuario);
-      }
-      if (item.contraseña !== undefined) {
-        fields.push('contraseña = ?');
-        values.push(item.contraseña);
-      }
+  // Validar que el usuario exista
+  const usuarioActual = await this.findOne({ id });
+  if (!usuarioActual) { throw new Error('Usuario no encontrado'); }
 
-      if (fields.length === 0) return await this.findOne({ id }); // Nada que actualizar
-
-      await pool.query(
-        `UPDATE usuario SET ${fields.join(', ')} WHERE id_usuario = ?`,
-        [...values, usuarioId]
-      );
-
-      return await this.findOne({ id });
+  // Validar que el nuevo nombre de usuario no exista (si se cambia)
+  if (
+    item.user_usuario &&
+    item.user_usuario.trim() !== usuarioActual.user_usuario
+  ) {
+    const existenteUser = await Usuario.findOne({
+      where: { user_usuario: item.user_usuario.trim() }
+    });
+    if (existenteUser && existenteUser.id_usuario !== usuarioId) {
+      throw new Error('Ya existe un usuario con ese nombre de usuario');
     }
-
-    public async delete(item: { id: string }): Promise<Usuario | undefined> {
-        try {
-          const usuarioToDelete = await this.findOne(item);
-          const usuarioId = Number.parseInt(item.id);
-          await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [usuarioId]);
-          return usuarioToDelete;
-        } catch (error: any) {
-          throw new Error('No se puede eliminar el usuario');
-        }
-      }
   }
+
+  // Validar que el nuevo email no exista (si se cambia)
+  if (
+    item.email_usuario &&
+    item.email_usuario.trim() !== usuarioActual.email_usuario
+  ) {
+    const existenteEmail = await Usuario.findOne({
+      where: { email_usuario: item.email_usuario.trim() }
+    });
+    if (existenteEmail && existenteEmail.id_usuario !== usuarioId) {
+      throw new Error('Ya existe un usuario con ese email');
+    }
+  }
+
+  // Si se actualiza la contraseña, hashearla
+  if (item.contraseña) {
+    item.contraseña = await bcrypt.hash(item.contraseña, 10);
+  }
+
+  // Actualizar solo los campos enviados
+  await usuarioActual.update(item);
+  return usuarioActual;
+}
+
+public async delete(item: { id: string }): Promise<Usuario | undefined> {
+  const usuarioToDelete = await this.findOne(item);
+  if (!usuarioToDelete) return undefined;
+
+  // Verificar si tiene pedidos asociados
+  const pedidosAsociados = await Pedido.count({
+    where: { id_usuario: usuarioToDelete.id_usuario }
+  });
+
+  if (pedidosAsociados > 0) {
+    throw new Error('No se puede eliminar el usuario porque tiene pedidos asociados.');
+  }
+
+  // Eliminar físicamente
+  await usuarioToDelete.destroy();
+  return usuarioToDelete;
+}
+}

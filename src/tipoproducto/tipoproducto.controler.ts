@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express"
 import { TipoProductoRepository } from "./tipoproducto.repository.js"
-import { TipoProducto } from "./tipoproducto.entity.js"
 
 const repository = new TipoProductoRepository()
 
@@ -54,7 +53,7 @@ async function findOne(req:Request, res:Response) {
 async function add(req:Request, res:Response) {
   const input = req.body.sanitizedInput
 
-    // VALIDACIÓN: Nombre único
+  // VALIDACIÓN: Nombre único
   const tipoExistente = await repository.findByName(input.nombre_tipo);
   if (tipoExistente) {
     return res.status(409).json({ 
@@ -62,13 +61,8 @@ async function add(req:Request, res:Response) {
     });
   }
 
-  const tipoproductoInput = new TipoProducto(
-    input.nombre_tipo,
-    input.desc_tipo
-  )
-
-  const tipoproducto = await repository.add(tipoproductoInput)
-  return res.status(201).send({ message: 'Tipo de Producto creado exitosamente', data: tipoproducto })
+  const tipoproducto = await repository.add(input);
+  return res.status(201).send({ message: 'Tipo de Producto creado exitosamente', data: tipoproducto });
 }
 
 
@@ -79,7 +73,7 @@ async function update(req: Request, res: Response) {
   // VALIDACIÓN: Nombre único (excepto el actual)
   if (input.nombre_tipo) {
     const tipoExistente = await repository.findByName(input.nombre_tipo);
-    if (tipoExistente && tipoExistente.id !== Number.parseInt(id)) {
+    if (tipoExistente && tipoExistente.idtipo_producto !== Number.parseInt(id)) {
       return res.status(409).json({ 
         message: 'Ya existe un tipo de producto con ese nombre' 
       });

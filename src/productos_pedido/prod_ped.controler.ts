@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { ProductosPedidoRepository } from "./prod_ped.repository.js";
-import { ProductosPedido } from "./prod_ped.entity.js";
+import { ProductosPedido } from "../models/prod_ped.model.js";
+import { Producto } from "../models/producto.model.js"; 
+import { Pedido } from "../models/pedido.model.js";
 
 const repository = new ProductosPedidoRepository();
 
@@ -91,7 +93,6 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
-// ➕ AGREGAR (admin - casos excepcionales)
 async function add(req: Request, res: Response) {
   const input = req.body.sanitizedInput;
 
@@ -102,36 +103,55 @@ async function add(req: Request, res: Response) {
     });
   }
 
-  if (!input.precio_unitario || input.precio_unitario <= 0) {
-    return res.status(400).json({ 
-      message: 'Precio unitario es requerido y debe ser mayor a 0' 
-    });
-  }
   try {
-    // Calcular precio_parcial automáticamente
-    const cantidad = Number(input.cantidad);
-    const precioUnitario = Number(input.precio_unitario);
-    const precio_parcial = cantidad * precioUnitario;
+    // Buscar el producto para obtener el precio actual
+    const producto = await Producto.findByPk(input.id_producto);
+    if (!producto) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
 
-    const nuevoProductoPedido = new ProductosPedido(
+    const cantidad = Number(input.cantidad);
+    const precio_unitario = Number(producto.precio);
+    const precio_parcial = cantidad * precio_unitario;
+
+    // Pasa un objeto plano al repository
+    const creado = await repository.add({
+      id_pedido: Number(input.id_pedido),
+      id_producto: Number(input.id_producto),
       cantidad,
-      precioUnitario,
-      precio_parcial,
-      Number(input.id_producto),
-      Number(input.id_pedido)
+      precio_unitario,
+      precio_parcial
+    });
+
+    if (!creado) {
+      return res.status(500).json({ message: "No se pudo crear el producto en el pedido" });
+    }
+
+    // Recalcular el total del pedido
+    const productos = await repository.findByPedido(creado.id_pedido);
+    const nuevoTotal = productos.productos.reduce(
+      (sum: number, p: any) => sum + (Number(p.precio_parcial) || 0),
+      0
     );
 
-    const creado = await repository.add(nuevoProductoPedido);
-    res.status(201).json({ 
+    // Actualizar el total en la tabla pedido
+    await Pedido.update(
+      { total_pedido: nuevoTotal },
+      { where: { id_pedido: creado.id_pedido } }
+    );
+
+    // Devuelve la respuesta aquí, donde nuevoTotal está definido
+    return res.status(201).json({ 
       message: "Producto agregado al pedido exitosamente", 
-      data: creado 
+      data: creado,
+      total_pedido_actualizado: nuevoTotal
     });
+
   } catch (error: any) {
     res.status(400).json({ message: error.message || "Error al agregar producto al pedido" });
   }
 }
 
-// ✏️ ACTUALIZAR CANTIDAD (admin - correcciones)
 async function update(req: Request, res: Response) {
   const id_pedido = Number.parseInt(req.params.id_pedido);
   const id_producto = Number.parseInt(req.params.id_producto);
@@ -142,38 +162,67 @@ async function update(req: Request, res: Response) {
   }
 
   try {
-    // ✅ CORREGIDO - Usar método correcto:
     const actualizado = await repository.updateByPedidoYProducto(id_pedido, id_producto, { cantidad });
     
     if (!actualizado) {
       return res.status(404).json({ message: 'Producto en pedido no encontrado' });
     }
 
+
+    // Recalcular el total del pedido
+    const productos = await repository.findByPedido(id_pedido);
+    const nuevoTotal = productos.productos.reduce(
+      (sum: number, p: any) => sum + (Number(p.precio_parcial) || 0),
+      0
+    );
+
+    // Actualizar el total en la tabla pedido
+    await Pedido.update(
+      { total_pedido: nuevoTotal },
+      { where: { id_pedido } }
+    );
+
     res.json({ 
       message: 'Cantidad actualizada exitosamente',
-      data: actualizado 
+      data: actualizado,
+      total_pedido_actualizado: nuevoTotal
     });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
 }
 
-// 🗑️ ELIMINAR (admin - correcciones)
+// Eliminar producto de un pedido
 async function remove(req: Request, res: Response) {
   const id_pedido = Number.parseInt(req.params.id_pedido);
   const id_producto = Number.parseInt(req.params.id_producto);
 
   try {
-    // ✅ CORREGIDO - Usar método correcto:
+    // 1. Elimina el producto del pedido
     const eliminado = await repository.deleteByPedidoYProducto(id_pedido, id_producto);
-    
     if (!eliminado) {
       return res.status(404).json({ message: 'Producto en pedido no encontrado' });
     }
 
+    // 2. Busca los productos restantes en el pedido
+    const productos = await repository.findByPedido(id_pedido);
+
+    // 3. Calcula el nuevo total (si no hay productos, será 0)
+    const nuevoTotal = (productos.productos ?? []).reduce(
+      (sum: number, p: any) => sum + (Number(p.precio_parcial) || 0),
+      0
+    );
+
+    // 4. Actualiza el total en la tabla pedido
+    await Pedido.update(
+      { total_pedido: nuevoTotal },
+      { where: { id_pedido } }
+    );
+
     res.json({ 
       message: 'Producto eliminado del pedido exitosamente',
-      data: eliminado 
+      data: eliminado,
+      total_pedido_actualizado: nuevoTotal
     });
   } catch (error: any) {
     res.status(400).json({ message: error.message });

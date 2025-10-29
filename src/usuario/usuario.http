@@ -1,18 +1,62 @@
+### creamos un admin (guardar la contraseña para login después)
+POST http://localhost:4000/api/usuario/add
+Content-Type: application/json
+
+{
+  "user_usuario": "admin1",
+  "contraseña": "admin123",
+  "email_usuario": "admin@email.com",
+  "tel_usuario": 1199988877,
+  "direccion_usuario": "Oficina Central 100",
+  "nombre_usuario": "Administrador",
+  "apellido_usuario": "Principal",
+  "tipo_usuario": 1
+}
+### 1. LOGIN (Público) - Obtener token
+POST http://localhost:4000/api/usuario/login
+Content-Type: application/json
+
+{
+  "user_usuario": "admin1",
+  "contraseña": "admin123"
+}
+###eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE1MzgwMDAsImV4cCI6MTc2MTU0MTYwMH0.WX8vPYq9fiD_UmG9OPPnJbxkB6lB-e2MeFPMoIJ-Sn0
+
 ### 1. REGISTRO (Público) - Crear nuevo usuario
 POST http://localhost:4000/api/usuario/add
 Content-Type: application/json
 
 {
-  "user_usuario": "bere167",
-  "contraseña": "bere167",
-  "email_usuario": "bere@email.com",
-  "tel_usuario": 123456789,
-  "direccion_usuario": "Calle 123",
-  "nombre_usuario": "Berenice",
-  "apellido_usuario": "López"
+  "user_usuario": "juanperez",
+  "contraseña": "123456",
+  "email_usuario": "juan@correo.com",
+  "tel_usuario": 1122334455,
+  "direccion_usuario": "Calle Falsa 123",
+  "nombre_usuario": "Juan",
+  "apellido_usuario": "Pérez"
 }
 
-###
+###creamos otro usuario (guardar la contraseña para login después)
+POST http://localhost:4000/api/usuario/add
+Content-Type: application/json
+
+{
+  "user_usuario": "mariarodriguez",
+  "contraseña": "claveSegura2024",
+  "email_usuario": "maria.rodriguez@email.com",
+  "tel_usuario": 1133445566,
+  "direccion_usuario": "Av. Siempre Viva 742",
+  "nombre_usuario": "María",
+  "apellido_usuario": "Rodríguez"
+}
+### 1. LOGIN (Público) - Obtener token
+POST http://localhost:4000/api/usuario/login
+Content-Type: application/json
+
+{
+  "user_usuario": "juanperez",
+  "contraseña": "123456"
+}
 
 ### 2. LOGIN (Público) - Obtener token
 POST http://localhost:4000/api/usuario/login
@@ -23,13 +67,22 @@ Content-Type: application/json
   "contraseña": "bere167"
 }
 
-###
+###Ver perfil de usuario (Requiere token de usuario)
+GET http://localhost:4000/api/usuario/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcl91c3VhcmlvIjoianVhbnBlcmV6IiwidGlwb191c3VhcmlvIjoyLCJpYXQiOjE3NjE1MzcyNTcsImV4cCI6MTc2MTU0MDg1N30.y1cfqnc-8R0wHXlR1SF9LypOwaI_bfI1eYwu13eM2Wc
 
 ### 3. VER MI PERFIL (Requiere token de usuario)
 GET http://localhost:4000/api/usuario/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c3VhcmlvIjoiYmVyZTE2NyIsInRpcG9fdXN1YXJpbyI6MiwiaWF0IjoxNzU5NTA1Nzc0LCJleHAiOjE3NTk1MDkzNzR9.C-YdPUhE11Yu09L-nGkvfTl47hoX2Vm0iJ5OWn25CvY
 
-###
+### Editar perfil de usuario (Requiere token de usuario)
+PUT http://localhost:4000/api/usuario/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcl91c3VhcmlvIjoianVhbnBlcmV6IiwidGlwb191c3VhcmlvIjoyLCJpYXQiOjE3NjE1MzcyNTcsImV4cCI6MTc2MTU0MDg1N30.y1cfqnc-8R0wHXlR1SF9LypOwaI_bfI1eYwu13eM2Wc
+Content-Type: application/json
+
+{
+  "direccion_usuario": "Nueva dirección 456"
+}
 
 ### 4. EDITAR MI PERFIL (Requiere token de usuario)
 PUT http://localhost:4000/api/usuario/profile
@@ -46,13 +99,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcl91c
 
 ### 5. VER TODOS LOS USUARIOS (Solo admin)
 GET http://localhost:4000/api/usuario/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUwNjEyNywiZXhwIjoxNzU5NTA5NzI3fQ.m_GhebyAeW6DWBXsAG1Kp6WNrvOiz5jYSSpsfO72QkM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE1MzgwMDAsImV4cCI6MTc2MTU0MTYwMH0.WX8vPYq9fiD_UmG9OPPnJbxkB6lB-e2MeFPMoIJ-Sn0
 
 ###
 
 ### 6. VER USUARIO ESPECÍFICO (Solo admin)
-GET http://localhost:4000/api/usuario/2
-Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+GET http://localhost:4000/api/usuario/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE1MzgwMDAsImV4cCI6MTc2MTU0MTYwMH0.WX8vPYq9fiD_UmG9OPPnJbxkB6lB-e2MeFPMoIJ-Sn0
 
 ###
 
@@ -69,18 +122,16 @@ Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 ###
 
 ### 8. ELIMINAR USUARIO (Solo admin)
-DELETE http://localhost:4000/api/usuario/1
-Authorization: Bearer TOKEN_DE_ADMIN_AQUI
+DELETE http://localhost:4000/api/usuario/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE1MzgwMDAsImV4cCI6MTc2MTU0MTYwMH0.WX8vPYq9fiD_UmG9OPPnJbxkB6lB-e2MeFPMoIJ-Sn0
 
-###
-
-### 9. LOGIN COMO ADMIN (Primero crear admin en BD)
-POST http://localhost:4000/api/usuario/login
+### editar usuario (solo admin)
+PUT http://localhost:4000/api/usuario/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE1MzgwMDAsImV4cCI6MTc2MTU0MTYwMH0.WX8vPYq9fiD_UmG9OPPnJbxkB6lB-e2MeFPMoIJ-Sn0
 Content-Type: application/json
 
 {
-  "user_usuario": "admin",
-  "contraseña": "admin123"
+  "nombre_usuario": "Juana"
 }
 
 

@@ -2,54 +2,53 @@ POST http://localhost:4000/api/usuario/login
 Content-Type: application/json
 
 {
-  "user_usuario": "admin",
+  "user_usuario": "admin1",
   "contraseña": "admin123"
 }
 
 ### COPIAR EL TOKEN ADMIN TAMBIÉN
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTE3NzQsImV4cCI6MTc2MTYxNTM3NH0.xoCry3l2CfDdbAtkUNeCHgQime-KIvRZFNRZXNee_Jg
+
 POST http://localhost:4000/api/usuario/login
 Content-Type: application/json
 
 {
-  "user_usuario": "cliente1",
+  "user_usuario": "juanperez",
   "contraseña": "123456"
 }
 
-### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c3VhcmlvIjoiY2xpZW50ZTEiLCJ0aXBvX3VzdWFyaW8iOjIsImlhdCI6MTc2MTE2MTA3NSwiZXhwIjoxNzYxMTY0Njc1fQ.nOi4GTFwmg1JJSY2w8zsJDuGbitfyqnuvo2gKCxpP7I
+### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcl91c3VhcmlvIjoianVhbnBlcmV6IiwidGlwb191c3VhcmlvIjoyLCJpYXQiOjE3NjE2MTE5MjgsImV4cCI6MTc2MTYxNTUyOH0.yMk_Qty0uQCJkCATZouy2I3KYwdCT6HQ9gAujWjgKgA
 
 ### 11. 📊 Ver todos los pedidos (admin)
 GET http://localhost:4000/api/pedido
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTE3NzQsImV4cCI6MTc2MTYxNTM3NH0.xoCry3l2CfDdbAtkUNeCHgQime-KIvRZFNRZXNee_Jg
 
-// ...existing code...
 
-### 12. 🔍 Buscar pedidos por fecha (admin) - URL SIMPLE
-GET http://localhost:4000/api/pedido/buscar-fecha?fecha=2025-10-22
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
-
+### 12. 🔍 Buscar pedidos por fecha (admin) 
+GET http://localhost:4000/api/pedido/buscar-fecha?fecha=2025-10-28
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTE3NzQsImV4cCI6MTc2MTYxNTM3NH0.xoCry3l2CfDdbAtkUNeCHgQime-KIvRZFNRZXNee_Jg
 
 ### 13. 📧 Buscar pedidos por email (admin)
 GET http://localhost:4000/api/pedido/buscar-email?email=cliente1@test.com
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTE3NzQsImV4cCI6MTc2MTYxNTM3NH0.xoCry3l2CfDdbAtkUNeCHgQime-KIvRZFNRZXNee_Jg
 
 ### 11. Ver todos los pedidos para saber las fechas reales
 GET http://localhost:4000/api/pedido
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
 
 ### 15. 📦 Marcar como entregado (admin) - PROBAR con ID real
-PUT http://localhost:4000/api/pedido/2/entregar
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
+PUT http://localhost:4000/api/pedido/8/entregar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTE3NzQsImV4cCI6MTc2MTYxNTM3NH0.xoCry3l2CfDdbAtkUNeCHgQime-KIvRZFNRZXNee_Jg
 
 ### 19. 🛒 Crear nuevo pedido desde carrito (cliente)
 POST http://localhost:4000/api/pedido/crear-desde-carrito
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c3VhcmlvIjoiY2xpZW50ZTEiLCJ0aXBvX3VzdWFyaW8iOjIsImlhdCI6MTc2MTE2MTA3NSwiZXhwIjoxNzYxMTY0Njc1fQ.nOi4GTFwmg1JJSY2w8zsJDuGbitfyqnuvo2gKCxpP7I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcl91c3VhcmlvIjoianVhbnBlcmV6IiwidGlwb191c3VhcmlvIjoyLCJpYXQiOjE3NjE2MTc3MjgsImV4cCI6MTc2MTYyMTMyOH0.0INcG4kPBx8IDyhsIJiE_8y-xM-5qXzJHIaQnNqb4vo
 
 {
   "items": [
-    {"id_producto": 1, "cantidad": 1},
-    {"id_producto": 4, "cantidad": 2}
+    {"id_producto": 4, "cantidad": 2},
+    {"id_producto": 7, "cantidad": 2}
   ]
 }
 
@@ -64,7 +63,7 @@ Content-Type: application/json
 ### 21. ❌ Producto inexistente
 POST http://localhost:4000/api/pedido/crear-desde-carrito
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c3VhcmlvIjoiY2xpZW50ZTEiLCJ0aXBvX3VzdWFyaW8iOjIsImlhdCI6MTc2MTE2MTA3NSwiZXhwIjoxNzYxMTY0Njc1fQ.nOi4GTFwmg1JJSY2w8zsJDuGbitfyqnuvo2gKCxpP7I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcl91c3VhcmlvIjoianVhbnBlcmV6IiwidGlwb191c3VhcmlvIjoyLCJpYXQiOjE3NjE2MTE5MjgsImV4cCI6MTc2MTYxNTUyOH0.yMk_Qty0uQCJkCATZouy2I3KYwdCT6HQ9gAujWjgKgA
 
 {
   "items": [{"id_producto": 999, "cantidad": 1}]
@@ -82,15 +81,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c
 ### 14. ✏️ Cambiar estado del pedido (admin) - FALTA PROBAR
 PUT http://localhost:4000/api/pedido/3/estado
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTc0MjgsImV4cCI6MTc2MTYyMTAyOH0.wroSBMJLXIdpa6vxyqcSN2yWN6fEQnj6m0aXAKqR-ZY
 
 {
   "estado_pedido": "procesando"
 }
 
 ### 16. 🗑️ Eliminar pedido (admin) - FALTA PROBAR
-DELETE http://localhost:4000/api/pedido/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2MTAzNCwiZXhwIjoxNzYxMTY0NjM0fQ.xRbHRStzJ1ltYiET1A99-_p-7U3IqswgmUD5aKhOkww
+DELETE http://localhost:4000/api/pedido/8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTc2MzMsImV4cCI6MTc2MTYyMTIzM30.aBk_3nwK1pqsfxzrqcSoNijU2iL2_N7y2iKFtJ8ty9U
 
 ### 17. 📋 Ver mis pedidos (cliente) - FALTA PROBAR
 GET http://localhost:4000/api/pedido/mis-pedidos
@@ -98,8 +97,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c
 
 ### 18. 🔍 Ver productos del pedido específico - FALTA PROBAR
 GET http://localhost:4000/api/productos-pedido/pedido/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c3VhcmlvIjoiY2xpZW50ZTEiLCJ0aXBvX3VzdWFyaW8iOjIsImlhdCI6MTc2MTE2NDgyMiwiZXhwIjoxNzYxMTY4NDIyfQ.2rB4uFuwY_P51O65wdxTd5W9vpGTSXxAyRUqRRleGyY
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTc2MzMsImV4cCI6MTc2MTYyMTIzM30.aBk_3nwK1pqsfxzrqcSoNijU2iL2_N7y2iKFtJ8ty9U
 ### 19. 💰 Consultar precios (sin login) - FALTA PROBAR
 POST http://localhost:4000/api/pedido/precios
 Content-Type: application/json
@@ -122,7 +120,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c
 
 ### 4. 🗑️ Eliminar el pedido pendiente
 DELETE http://localhost:4000/api/pedido/4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2NTE3NiwiZXhwIjoxNzYxMTY4Nzc2fQ.JtcL5tYt1l9RMn9gJsrtL6FSOwqe3c-Vkyy68XrXs2c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTc2MzMsImV4cCI6MTc2MTYyMTIzM30.aBk_3nwK1pqsfxzrqcSoNijU2iL2_N7y2iKFtJ8ty9U
 
 ### 6. 🛒 Crear pedido y marcarlo como entregado
 POST http://localhost:4000/api/pedido/crear-desde-carrito
@@ -153,7 +151,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c
 
 ### 10. ❌ Intentar eliminar producto que está en pedidos
 DELETE http://localhost:4000/api/producto/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2NTE3NiwiZXhwIjoxNzYxMTY4Nzc2fQ.JtcL5tYt1l9RMn9gJsrtL6FSOwqe3c-Vkyy68XrXs2c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTgyMDEsImV4cCI6MTc2MTYyMTgwMX0.5kBrkPGFnnhlgkHtBu3gNk-gNSfDCkopJ4C82XXOAvs
 
 ### 11. ⚠️ Intentar desactivar producto en lugar de eliminarlo
 PUT http://localhost:4000/api/producto/2
@@ -171,14 +169,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcl91c
 
 {
   "items": [
-    {"id_producto": 4, "cantidad": 1}
+    {"id_producto": 1, "cantidad": 1}
   ]
 }
 
 ### 13. 🔄 Reactivar producto
 PUT http://localhost:4000/api/producto/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE3NTgzOCwiZXhwIjoxNzYxMTc5NDM4fQ.8NnxUt9DE7Lxi42r9IDdCDXRHbtab6u_qWlFWJsgEoY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTgyMDEsImV4cCI6MTc2MTYyMTgwMX0.5kBrkPGFnnhlgkHtBu3gNk-gNSfDCkopJ4C82XXOAvs
 
 {
   "activo": true
@@ -188,7 +186,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c
 
 ### 30. Ver todos los productos como admin (incluye inactivos)
 GET http://localhost:4000/api/producto/todos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE3NTgzOCwiZXhwIjoxNzYxMTc5NDM4fQ.8NnxUt9DE7Lxi42r9IDdCDXRHbtab6u_qWlFWJsgEoY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTgyMDEsImV4cCI6MTc2MTYyMTgwMX0.5kBrkPGFnnhlgkHtBu3gNk-gNSfDCkopJ4C82XXOAvs
 
 ### 31. Ver productos públicos (solo activos)
 GET http://localhost:4000/api/producto
@@ -252,3 +250,43 @@ GET http://localhost:4000/api/producto/tipo/1
 
 ### Cliente selecciona producto específico
 GET http://localhost:4000/api/producto/1
+
+
+### Prueba de crud prod_ped
+
+###  1. Ver todos los productos_pedido (admin)
+GET http://localhost:4000/api/productos_pedido/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2ODYyNTIsImV4cCI6MTc2MTY4OTg1Mn0.Wb8VJinlWYGs-qQ0r1rlnrjURhyVk0UGMku9fYDmga4
+
+### 2. Ver productos de un pedido específico (admin)
+GET http://localhost:4000/api/productos_pedido/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2ODYyNTIsImV4cCI6MTc2MTY4OTg1Mn0.Wb8VJinlWYGs-qQ0r1rlnrjURhyVk0UGMku9fYDmga4
+
+### 3. Ver un producto puntual en un pedido (admin)
+###(Reemplaza 3 por id_pedido y 4 por id_producto)
+GET http://localhost:4000/api/productos_pedido/3/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2ODYyNTIsImV4cCI6MTc2MTY4OTg1Mn0.Wb8VJinlWYGs-qQ0r1rlnrjURhyVk0UGMku9fYDmga4
+
+### 4. Agregar un producto a un pedido (admin)
+POST http://localhost:4000/api/productos_pedido
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE3MDg3NjEsImV4cCI6MTc2MTcxMjM2MX0.ngnkTwaNNOtw7cz-6Yggvm9UzipjBYiZz6HNkjo2lx8
+
+{
+  "id_pedido": 9,
+  "id_producto": 4,
+  "cantidad": 2
+}
+
+### 5. Actualizar cantidad de un producto en un pedido (admin)
+PUT http://localhost:4000/api/productos_pedido/9/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE3MDg3NjEsImV4cCI6MTc2MTcxMjM2MX0.ngnkTwaNNOtw7cz-6Yggvm9UzipjBYiZz6HNkjo2lx8
+
+{
+  "cantidad": 3
+}
+
+### 6. Eliminar un producto de un pedido (admin)
+DELETE http://localhost:4000/api/productos_pedido/3/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE3MDg3NjEsImV4cCI6MTc2MTcxMjM2MX0.ngnkTwaNNOtw7cz-6Yggvm9UzipjBYiZz6HNkjo2lx8
