@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from '../shared/db/sequelize.js';
+import { TipoProducto } from './tipoproducto.model.js';
 
 export interface ProductoAttributes {
   idproducto: number;
@@ -74,4 +75,4 @@ Producto.init(
   }
 );
 
-import { TipoProducto } from './tipoproducto.model.js';
+

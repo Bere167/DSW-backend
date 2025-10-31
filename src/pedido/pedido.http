@@ -290,3 +290,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c
 ### 6. Eliminar un producto de un pedido (admin)
 DELETE http://localhost:4000/api/productos_pedido/3/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE3MDg3NjEsImV4cCI6MTc2MTcxMjM2MX0.ngnkTwaNNOtw7cz-6Yggvm9UzipjBYiZz6HNkjo2lx8
+
+http://localhost:4000/uploads/productos/monitorcurvo.jpg

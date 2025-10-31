@@ -11,9 +11,10 @@ import { pedidoRouter } from "./pedido/pedido.routters.js";
 
 const app = express()
 app.use(corsMiddleware)
-
 app.use(express.json())
 
+// archivos estáticos para subir imágenes
+app.use('/uploads', express.static('uploads'));
 
 app.use('/api/tipoproducto',tipoproductoRouter)
 app.use('/api/producto', productoRouter)
