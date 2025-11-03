@@ -123,8 +123,8 @@ async function update(req: Request, res: Response) {
   if (input.user_usuario !== undefined && (typeof input.user_usuario !== 'string' || input.user_usuario.trim() === '')) {
     return res.status(400).send({ message: 'El usuario debe ser texto no vacío.' });
   }
-  if (input.contraseña !== undefined && (typeof input.contraseña !== 'string' || input.contraseña.trim() === '')) {
-    return res.status(400).send({ message: 'La contraseña debe ser texto no vacío.' });
+  if (input.contraseña !== undefined && typeof input.contraseña !== 'string') {
+  return res.status(400).send({ message: 'La contraseña debe ser texto.' });
   }
   if (input.email_usuario !== undefined && (typeof input.email_usuario !== 'string' || input.email_usuario.trim() === '')) {
     return res.status(400).send({ message: 'El email debe ser texto no vacío.' });

@@ -88,8 +88,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c
 }
 
 ### 16. 🗑️ Eliminar pedido (admin) - FALTA PROBAR
-DELETE http://localhost:4000/api/pedido/8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTc2MzMsImV4cCI6MTc2MTYyMTIzM30.aBk_3nwK1pqsfxzrqcSoNijU2iL2_N7y2iKFtJ8ty9U
+DELETE http://localhost:4000/api/pedido/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzI1MTgsImV4cCI6MTc2MjEzNjExOH0.cuXxBJtNGmC_cxgFLhnAz8FOf3B2j-HhWfesMrSm6hU
 
 ### 17. 📋 Ver mis pedidos (cliente) - FALTA PROBAR
 GET http://localhost:4000/api/pedido/mis-pedidos
@@ -150,9 +150,8 @@ GET http://localhost:4000/api/pedido
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTE2NTE3NiwiZXhwIjoxNzYxMTY4Nzc2fQ.JtcL5tYt1l9RMn9gJsrtL6FSOwqe3c-Vkyy68XrXs2c
 
 ### 10. ❌ Intentar eliminar producto que está en pedidos
-DELETE http://localhost:4000/api/producto/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjE2MTgyMDEsImV4cCI6MTc2MTYyMTgwMX0.5kBrkPGFnnhlgkHtBu3gNk-gNSfDCkopJ4C82XXOAvs
-
+DELETE http://localhost:4000/api/producto/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzI1MTgsImV4cCI6MTc2MjEzNjExOH0.cuXxBJtNGmC_cxgFLhnAz8FOf3B2j-HhWfesMrSm6hU
 ### 11. ⚠️ Intentar desactivar producto en lugar de eliminarlo
 PUT http://localhost:4000/api/producto/2
 Content-Type: application/json

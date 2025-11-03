@@ -11,7 +11,7 @@ POST http://localhost:4000/api/usuario/login
 Content-Type: application/json
 
 {
-  "user_usuario": "admin",
+  "user_usuario": "admin1",
   "contraseña": "admin123"
 }
 
@@ -45,9 +45,8 @@ Authorization: Bearer TOKEN_DE_ADMIN_AQUI
 }
 
 ### 6. ELIMINAR TIPO DE PRODUCTO (Solo Admin)
-DELETE http://localhost:4000/api/tipoproducto/5
-Authorization: Bearer TOKEN_DE_ADMIN_AQUI
-
+DELETE http://localhost:4000/api/tipoproducto/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzI1MTgsImV4cCI6MTc2MjEzNjExOH0.cuXxBJtNGmC_cxgFLhnAz8FOf3B2j-HhWfesMrSm6hU
 
 
 ### Probando manejo de errores
@@ -74,3 +73,85 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c
 ### CASO 5: Error - Eliminar con productos asociados
 DELETE http://localhost:4000/api/tipoproducto/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc1OTUxNzg2OCwiZXhwIjoxNzU5NTIxNDY4fQ.kGMTqsAOi-4g0ZZ38UpCvp0YIjyfE0WAs1iFtVM7xj4
+
+### CARGANDO TIPOS DE PRODUCTOS
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Gabinetes"
+}
+
+###
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Auriculares"
+}
+
+###
+
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Teclados"
+}
+
+###
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Mouses"
+}
+
+###
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Monitores"
+}
+
+
+###
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Procesadores"
+}
+
+###
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Accesorios"
+}
+
+###
+
+POST http://localhost:4000/api/tipoproducto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_tipo": "Almacenamiento"
+}
+

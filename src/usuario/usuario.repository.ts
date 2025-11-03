@@ -97,10 +97,17 @@ export class UsuarioRepository implements Repository<Usuario> {
     }
   }
 
-  // Si se actualiza la contraseña, hashearla
-  if (item.contraseña) {
-    item.contraseña = await bcrypt.hash(item.contraseña, 10);
-  }
+  // Solo actualizar la contraseña si viene y no es string vacío
+if (
+  item.contraseña !== undefined &&
+  typeof item.contraseña === 'string' &&
+  item.contraseña.trim() !== ''
+) {
+  item.contraseña = await bcrypt.hash(item.contraseña, 10);
+} else {
+  // Si viene vacía o undefined, no la actualices
+  delete item.contraseña;
+}
 
   // Actualizar solo los campos enviados
   await usuarioActual.update(item);

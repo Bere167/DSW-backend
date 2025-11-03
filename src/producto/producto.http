@@ -57,3 +57,831 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c
 ###reactiva un producto
 PUT http://localhost:4000/api/producto/1/reactivar
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl91c3VhcmlvIjoiYWRtaW4iLCJ0aXBvX3VzdWFyaW8iOjEsImlhdCI6MTc2MTUyMDE2MywiZXhwIjoxNzYxNTIzNzYzfQ.2DXxWd4f5hAiN7dOredTSjgTgGt3z9Avb1mtjJEQPmA
+
+
+##ENDPOINTS PARA CARGAR PRODUCTOS
+
+###GABINETES
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete Aluna Gamer AL-X94B",
+  "precio": 130.000,
+  "desc_prod": "Gabinete Aluna Gamer AL-X94B, Fuente 600W 80+ White, ATX/MicroATX/GPU hasta 360mm, 2 Cooler 120mm ARGB, Control+controladora ARGB",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Gabinete1.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete Aluna Slim AL-UM93",
+  "precio": 54.000,
+  "desc_prod": "Gabinete Aluna Slim AL-UM93, Fuente 500W/Cooler 80mm sup",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Gabinete2.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete Aluna Gamer AL-LX76",
+  "precio": 126.800,
+  "desc_prod": "Gabinete Aluna Gamer AL-LX76, Fuente 600W 80+ White, ATX/MicroATX/MiniATX, GPU hasta 360mm/3 cooler ARGB, Control+controladora ARGB",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Gabinete3.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete kit Aluna AL-KG15",
+  "precio": 72.700,
+  "desc_prod": "Gabinete kit Aluna AL-KG15, Gamer/Fuente 520W/Led frontal, Teclado-mouse-parlante led, Cooler trasero 80mm",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Gabinete4.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete Sentey CS3-1370 600w",
+  "precio": 89.300,
+  "desc_prod": "Gabinete Sentey CS3-1370 600w, (parlante/teclado/mouse)",
+  "cant_stock": 8,
+  "imagen": "uploads/productos/Gabinete5.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete Sentey GF10 X10 RGB",
+  "precio": 42.600,
+  "desc_prod": "Gabinete Sentey GF10 X10 RGB, Lateral Transparente",
+  "cant_stock": 6,
+  "imagen": "uploads/productos/Gabinete6.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete XFX Yoroi GC-10HE",
+  "precio": 100.000,
+  "desc_prod": "Gabinete XFX Yoroi GC-10HE, Gamer/Vidrio templado, Soporta VGA hasta 430mm, 3 cooler Fr + 1 Tr",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Gabinete7.jpg",
+  "id_tipoprod": 6
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzMxMDYsImV4cCI6MTc2MjEzNjcwNn0.wWhEYTXpO8iJv0XF_v0OQJ21brddUVtiDBYgYx65unM
+
+{
+  "nombre_prod": "Gabinete Raptor Thunder Strike",
+  "precio": 63.300,
+  "desc_prod": "Gabinete Raptor Thunder Strike, TG x2/Mid tower/1 cooler RGB, White",
+  "cant_stock": 7,
+  "imagen": "uploads/productos/Gabinete8.jpg",
+  "id_tipoprod": 6
+}
+
+###AURICULARES
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mic y auricular Noga Grid",
+  "precio": 39.000,
+  "desc_prod": "Mic y auricular Noga Grid, Gamer/Compatible PS4, USB + conectores plug 3.5mm, Sonido HQ",
+  "cant_stock": 6,
+  "imagen": "uploads/productos/Auricular1.jpg",
+  "id_tipoprod": 7
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mic y auricular Noga Hydra",
+  "precio": 40.000,
+  "desc_prod": "Mic y auricular Noga Hydra, Gamer/Led/Comp Ps4/Cable 2.1m, Conex USB+2 plug 3.5 PC, 7 tonos luces led",
+  "cant_stock": 8,
+  "imagen": "uploads/productos/Auricular2.jpg",
+  "id_tipoprod": 7
+}
+
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mic y auricular Astro A10",
+  "precio": 125.000,
+  "desc_prod": "Mic y auricular Astro A10, Gamer/Grey-Blue/Ps4-Pc-Xbox, Conex plug 3.5m 5 polos",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Auricular3.jpg",
+  "id_tipoprod": 7
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Auricular y mic Noga ST 9028",
+  "precio": 22.000,
+  "desc_prod": "Auricular y mic Noga ST 9028, Gamer/Control vol/Mic c/cable, Conector 3.5mm TRRS",
+  "cant_stock": 10,
+  "imagen": "uploads/productos/Auricular4.jpg",
+  "id_tipoprod": 7
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mic y auri Razer Blackshark",
+  "precio": 400.000,
+  "desc_prod": "Mic y auri Razer Blackshark, V2 Pro wireless, RZ04-04530100-R3U1",
+  "cant_stock": 13,
+  "imagen": "uploads/productos/Auricular5.jpg",
+  "id_tipoprod": 7
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mic y auricular Raptor Shadow",
+  "precio": 35.000,
+  "desc_prod": "Mic y auricular Raptor ShadowCore/RGB/Sonido 7.1/USB+3.5mmCancelacion de ruido",
+  "cant_stock": 9,
+  "imagen": "uploads/productos/Auricular6.jpg",
+  "id_tipoprod": 7
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mic y auricular Logitech G435",
+  "precio": 170.000,
+  "desc_prod": "Mic y auricular Logitech G435, Bluetooth/Mic incorporado",
+  "cant_stock": 4,
+  "imagen": "uploads/productos/Auricular7.jpg",
+  "id_tipoprod": 7
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Auricular Star Wars",
+  "precio": 19.000,
+  "desc_prod": "Auricular Star Wars",
+  "cant_stock": 6,
+  "imagen": "uploads/productos/Auricular8.jpg",
+  "id_tipoprod": 7
+}
+
+###TECLADOS
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado Genius Ergo KB-700",
+  "precio": 44.700,
+  "desc_prod": "Teclado Genius Ergo KB-700, USB/Black",
+  "cant_stock": 6,
+  "imagen": "uploads/productos/Teclado1.jpg",
+  "id_tipoprod": 8
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado numerico Genius",
+  "precio": 13.300,
+  "desc_prod": "Teclado numerico Genius, Nunpad 125 USBT",
+  "cant_stock": 10,
+  "imagen": "uploads/productos/Teclado2.jpg",
+  "id_tipoprod": 8
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado mecanico Panter Rayden",
+  "precio": 61.100,
+  "desc_prod": "Teclado mecanico Panter Rayden, GKM302/Gamer/Retroiluminado, RGB/Switch Blue",
+  "cant_stock": 20,
+  "imagen": "uploads/productos/Teclado3.jpg",
+  "id_tipoprod": 8
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado+mouse Logitech MK540",
+  "precio": 74.300,
+  "desc_prod": "Teclado+mouse Logitech MK540 Wireless",
+  "cant_stock": 15,
+  "imagen": "uploads/productos/Teclado4.jpg",
+  "id_tipoprod": 8
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado+mouse Levelup Pegasus",
+  "precio": 59.200,
+  "desc_prod": "Teclado+mouse Levelup Pegasus, Mecanico/Retroiluminado/USB, Mouse 7 botones/1200 a 4800Dpi",
+  "cant_stock": 12,
+  "imagen": "uploads/productos/Teclado5.jpg",
+  "id_tipoprod": 8
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado+funda Noga NKB-BT7",
+  "precio": 19.700,
+  "desc_prod": "Teclado+funda Noga NKB-BT7, Compatible con tablet 7 y 8 pulgadas, Conexion bluetooth",
+  "cant_stock": 8,
+  "imagen": "uploads/productos/Teclado6.jpg",
+  "id_tipoprod": 8
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado Trus GTX 853 Esca",
+  "precio": 34.600,
+  "desc_prod": "Teclado Trus GTX 853 Esca, Gamer/Metal Rainbow Esp/Led",
+  "cant_stock": 8,
+  "imagen": "uploads/productos/Teclado7.jpg",
+  "id_tipoprod": 8
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Teclado Razer BlackWindow V4 X",
+  "precio": 206.000,
+  "desc_prod": "Teclado Razer BlackWindow V4 X, Yellow switch español, RZ03-04702800-R311",
+  "cant_stock": 11,
+  "imagen": "uploads/productos/Teclado8.jpg",
+  "id_tipoprod": 8
+}
+
+###MOUSE
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mose Meetion R560 inalambrico",
+  "precio": 13.200,
+  "desc_prod": "Mose Meetion R560 inalambrico 800/1600 Dpi",
+  "cant_stock": 11,
+  "imagen": "uploads/productos/Mouse1.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Genius Ergo 9000S",
+  "precio": 19.400,
+  "desc_prod": "Mouse Genius Ergo 9000S Wireless-Bluetooth/Silencioso, Ergonomico/6 botones de 800 a 2400 Dpi",
+  "cant_stock": 20,
+  "imagen": "uploads/productos/Mouse2.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Razer Basilisk V3 Pro",
+  "precio": 266.300,
+  "desc_prod": "Mouse Razer Basilisk V3 Pro Ergonomic wireless/RGB/Black 35000 Dpii",
+  "cant_stock": 18,
+  "imagen": "uploads/productos/Mouse3.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Meetion BTM002 Dual",
+  "precio": 33.600,
+  "desc_prod": "Mouse Meetion BTM002 Dual, Inalambrico 2.4Ghz/Bluetooth, Bateria recargable/1600 Dpi Led",
+  "cant_stock": 23,
+  "imagen": "uploads/productos/Mouse4.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Genius Micro traveler",
+  "precio": 10.400,
+  "desc_prod": "Mouse Genius Micro traveler Silver/Cable retractil",
+  "cant_stock": 9,
+  "imagen": "uploads/productos/Mouse5.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Gigabyte Aorus M3 USB",
+  "precio": 73.100,
+  "desc_prod": "Mouse Gigabyte Aorus M3 USB, RGB/6400 dpi",
+  "cant_stock": 17,
+  "imagen": "uploads/productos/Mouse6.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Logitech M240 Silent",
+  "precio": 28.000,
+  "desc_prod": "Mouse Logitech M240 Silent Bluetooth",
+  "cant_stock": 13,
+  "imagen": "uploads/productos/Mouse7.jpg",
+  "id_tipoprod": 9
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse Genius NX-8008S Silent",
+  "precio": 11.800,
+  "desc_prod": "Mouse Genius NX-8008S Silent Wireless/3 botones/1200 Dpi",
+  "cant_stock": 23,
+  "imagen": "uploads/productos/Mouse8.jpg",
+  "id_tipoprod": 9
+}
+
+###MONITORES
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor portatil Arzopa A1",
+  "precio": 262.800,
+  "desc_prod": "Monitor portatil Arzopa A1, 15.6 FHD/IPS/60 Hz/HDMI-USBi",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Monitor1.jpg",
+  "id_tipoprod": 10
+}
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor Philips 27″ Curvo",
+  "precio": 324.000,
+  "desc_prod": "Monitor Philips 27″ Curvo 271E1SCA/55 /FHD 1920X1080 HDMI/VGA",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Monitor2.jpg",
+  "id_tipoprod": 10
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor Noblex Led 25″ FHD",
+  "precio": 194.000,
+  "desc_prod": "Monitor Noblex Led 25″ FHD IPS/100 Mhz/Antiglare 94NXSM2500",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Monitor3.jpg",
+  "id_tipoprod": 10
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor LG 27″ 27GS60F-B",
+  "precio": 504.300,
+  "desc_prod": "Monitor LG 27″ 27GS60F-B Gamer/FHD/180 Hz/IPS/HDR Display Port-HDMI/1 ms",
+  "cant_stock": 3,
+  "imagen": "uploads/productos/Monitor4.jpg",
+  "id_tipoprod": 10
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor Aluna Led 22″ M22J1",
+  "precio": 146.800,
+  "desc_prod": "Monitor Aluna Led 22″ M22J1, Panel VA/FHD 1920X1080 75Hz VGA+HDMI",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Monitor5.jpg",
+  "id_tipoprod": 10
+}
+
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor AOC Gamer 24″ G2490VX",
+  "precio": 305.400,
+  "desc_prod": "Monitor AOC Gamer 24″ G2490VX, Pant 23.8″» FHD 144Hz VA panel Refresco 1ms/Freesync Premium Hdmi-DP",
+  "cant_stock": 7,
+  "imagen": "uploads/productos/Monitor6.jpg",
+  "id_tipoprod": 10
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor-Tv Kanji 24″ TDA",
+  "precio": 344.700,
+  "desc_prod": "Monitor-Tv Kanji 24″ TDA, Resol HD monitor/FHD TV Control remoto",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Monitor7.jpg",
+  "id_tipoprod": 10
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Monitor led AOC G2490VX Gamer",
+  "precio": 230.000,
+  "desc_prod": "Monitor led AOC G2490VX Gamer Pant 23.8″» FHD 144Hz VA panel, Refresco 1ms/Freesync Premium, Hdmi-DP",
+  "cant_stock": 4,
+  "imagen": "uploads/productos/Monitor8.jpg",
+  "id_tipoprod": 10
+}
+
+###PROCESADORES
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador Intel Core I7 12700",
+  "precio": 604.000,
+  "desc_prod": "Procesador Intel Core I7 12700, Socket 1700/12 nucleos/65W, 25Mb Intel Smart cache",
+  "cant_stock": 4,
+  "imagen": "uploads/productos/Procesador1.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador Intel Core I3 14100",
+  "precio": 380.000,
+  "desc_prod": "Procesador Intel Core I3 14100, Socket 1700/3.5Ghz/Cache 12Mb, Graficos Intel UHD 730",
+  "cant_stock": 7,
+  "imagen": "uploads/productos/Procesador2.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador Intel Core I5 12400",
+  "precio": 312.000,
+  "desc_prod": "Procesador Intel Core I5 12400, Socket 1700/6 nucleos/2.50Ghz, 18Mb Intel, Smart cache, Graficos Intel UHD 730",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Procesador3.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador Intel Core I5 14400",
+  "precio": 403.400,
+  "desc_prod": "Procesador Intel Core I5 14400, Socket 1700/10 nucleos/3.5Ghz, 20Mb Intel Smart cache, Graficos Intel UHD 730",
+  "cant_stock": 5,
+  "imagen": "uploads/productos/Procesador4.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador AMD Ryzen 7 7800X3D",
+  "precio": 925.500,
+  "desc_prod": "Procesador AMD Ryzen 7 7800X3D, AM5/8 nucleos/4.2 Ghz/120W, AMD Radeon/Sin cooler",
+  "cant_stock": 2,
+  "imagen": "uploads/productos/Procesador5.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador AMD Ryzen 5 7600",
+  "precio": 403.500,
+  "desc_prod": "Procesador AMD Ryzen 5 7600, Socket AM5/6 nucleos/3.8Ghz, Cache L3 32Mb/Radeon",
+  "cant_stock": 4,
+  "imagen": "uploads/productos/Procesador6.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador AMD Athlon 3000G",
+  "precio": 76.000,
+  "desc_prod": "Procesador AMD Athlon 3000G, Socket AM4/Dual Core/3.5Ghz, Graficos Radeon Vega 3",
+  "cant_stock": 7,
+  "imagen": "uploads/productos/Procesador7.jpg",
+  "id_tipoprod": 11
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Procesador AMD Ryzen 3 3200G",
+  "precio": 121.400,
+  "desc_prod": "Procesador AMD Ryzen 3 3200G, Socket AM4/4 nucleos/3.6Ghz, Cache L3 4Mb/Radeon Vega 8",
+  "cant_stock": 4,
+  "imagen": "uploads/productos/Procesador8.jpg",
+  "id_tipoprod": 11
+}
+
+##ACCESORIOS
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Base para auriculares Genius",
+  "precio": 36.500,
+  "desc_prod": "Base para auriculares Genius, RS2 GX-UH100/Porta celular, 8 modos iluminacion RGB, 2 puertos USB A + 2 USB C",
+  "cant_stock": 10,
+  "imagen": "uploads/productos/Accesorio1.jpg",
+  "id_tipoprod": 12
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Mouse pad Genius 500S RGB",
+  "precio": 25.600,
+  "desc_prod": "Mouse pad Genius 500S RGB, 10 modos iluminacion Chroma 450x400x3mm/Sup ultrasuave, Base antideslizante",
+  "cant_stock": 28,
+  "imagen": "uploads/productos/Accesorio2.jpg",
+  "id_tipoprod": 12
+}
+
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Microfono Condenser RGB",
+  "precio": 46.100,
+  "desc_prod": "Microfono Condenser RGB",
+  "cant_stock": 13,
+  "imagen": "uploads/productos/Accesorio3.jpg",
+  "id_tipoprod": 12
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Microfono Trust GTX 241 Velica",
+  "precio": 81.000,
+  "desc_prod": "Microfono Trust GTX 241 Velica, Streaming USB con filtro, Tripode/PC-PS4-PS5",
+  "cant_stock": 17,
+  "imagen": "uploads/productos/Accesorio4.jpg",
+  "id_tipoprod": 12
+}
+
+###
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Gamepad para PS4 NG-4300X",
+  "precio": 73.600,
+  "desc_prod": "Gamepad para PS4 NG-4300X Bluetooth",
+  "cant_stock": 28,
+  "imagen": "uploads/productos/Accesorio5.jpg",
+  "id_tipoprod": 12
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Adaptador USB a RJ45",
+  "precio": 6.000,
+  "desc_prod": "Adaptador USB a RJ45",
+  "cant_stock": 28,
+  "imagen": "uploads/productos/Accesorio6.jpg",
+  "id_tipoprod": 12
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Web Cam Logitech C920S PRO HD",
+  "precio": 154.200,
+  "desc_prod": "Web Cam Logitech C920S PRO HD 1080p a 30 fps",
+  "cant_stock": 14,
+  "imagen": "uploads/productos/Accesorio7.jpg",
+  "id_tipoprod": 12
+}
+
+###
+
+POST http://localhost:4000/api/producto
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcl91c3VhcmlvIjoiYWRtaW4xIiwidGlwb191c3VhcmlvIjoxLCJpYXQiOjE3NjIxMzY5MDUsImV4cCI6MTc2MjE0MDUwNX0.SO153PvmHTZOsz6cUvDwB10x4TJJWcsbcw63jHv81ec
+
+{
+  "nombre_prod": "Disco externo Lexar SSD 512Gb",
+  "precio": 118.000,
+  "desc_prod": "Disco externo Lexar SSD 512Gb SL 200/Type-C USB 3.1",
+  "cant_stock": 14,
+  "imagen": "uploads/productos/Accesorio8.jpg",
+  "id_tipoprod": 12
+}
+
+
